@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { motion } from 'framer-motion';
-import { Linkedin, Twitter } from 'lucide-react';
+import { FaWhatsapp, FaInstagram } from 'react-icons/fa';
 
 const TeamSection = () => {
   const { t } = useLanguage();
@@ -10,7 +10,7 @@ const TeamSection = () => {
     {
       name: t('صمود السلامين', 'Sumood Salameen'),
       role: t('المديرة التنفيذية ومطورة البرمجيات', 'CEO & Software Developer'),
-      image: 'https://img.freepik.com/free-vector/hijab-woman-character_603843-1099.jpg',
+      image: 'https://img.freepik.com/free-vector/hijab-woman-character_603843-1099.jpg?w=400',
       bio: t('خبيرة في تطوير البرمجيات وقيادة المشاريع التقنية', 'Expert in software development and technical project leadership')
     }
   ];
@@ -73,12 +73,22 @@ const TeamSection = () => {
               </p>
 
               <div className="flex justify-center gap-3">
-                <button className="p-2 bg-[#3B4961]/30 rounded-lg hover:bg-[#3B4961]/50 transition-colors">
-                  <Linkedin className="w-5 h-5 text-[#CBCCC8]" />
-                </button>
-                <button className="p-2 bg-[#3B4961]/30 rounded-lg hover:bg-[#3B4961]/50 transition-colors">
-                  <Twitter className="w-5 h-5 text-[#CBCCC8]" />
-                </button>
+                <a 
+                  href="https://wa.me/972592128272" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="p-2 bg-[#3B4961]/30 rounded-lg hover:bg-[#3B4961]/50 transition-colors"
+                >
+                  <FaWhatsapp className="w-5 h-5 text-[#CBCCC8]" />
+                </a>
+                <a 
+                  href="https://www.instagram.com/nova.co.web?igsh=c2w1NjQ2OWMxcWY1" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="p-2 bg-[#3B4961]/30 rounded-lg hover:bg-[#3B4961]/50 transition-colors"
+                >
+                  <FaInstagram className="w-5 h-5 text-[#CBCCC8]" />
+                </a>
               </div>
             </motion.div>
           ))}

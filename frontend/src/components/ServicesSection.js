@@ -33,24 +33,6 @@ const ServicesSection = () => {
       name: t('الأنظمة المخصصة', 'Custom Systems'),
       desc: t('أنظمة برمجية مخصصة لإدارة أعمالك بكفاءة عالية', 'Custom software systems to manage your business efficiently'),
       price: '$1000'
-    },
-    {
-      icon: 'Bot',
-      name: t('أتمتة وذكاء اصطناعي', 'AI & Automation'),
-      desc: t('حلول ذكية لأتمتة العمليات وتحسين الإنتاجية', 'Smart solutions to automate processes and improve productivity'),
-      price: '+$200'
-    },
-    {
-      icon: 'Palette',
-      name: t('الهوية البصرية', 'Visual Identity'),
-      desc: t('تصميم هوية بصرية كاملة تعكس قيم علامتك التجارية', 'Complete visual identity design reflecting your brand values'),
-      price: t('مخصص', 'Custom')
-    },
-    {
-      icon: 'Share2',
-      name: t('إدارة التواصل الاجتماعي', 'Social Media'),
-      desc: t('إدارة حساباتك على منصات التواصل الاجتماعي باحترافية', 'Professional management of your social media accounts'),
-      price: t('مخصص', 'Custom')
     }
   ];
 

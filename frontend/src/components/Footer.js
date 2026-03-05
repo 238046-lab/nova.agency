@@ -1,7 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { motion } from 'framer-motion';
-import { FaWhatsapp, FaInstagram, FaTwitter, FaLinkedin } from 'react-icons/fa';
+import { FaWhatsapp, FaInstagram } from 'react-icons/fa';
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -15,9 +14,7 @@ const Footer = () => {
 
   const socials = [
     { icon: FaWhatsapp, href: 'https://wa.me/972592128272' },
-    { icon: FaInstagram, href: '#' },
-    { icon: FaTwitter, href: '#' },
-    { icon: FaLinkedin, href: '#' }
+    { icon: FaInstagram, href: 'https://www.instagram.com/nova.co.web?igsh=c2w1NjQ2OWMxcWY1' }
   ];
 
   return (
