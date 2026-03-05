@@ -51,8 +51,7 @@ const HeroSection = () => {
               className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#CBCCC8] leading-tight mb-6"
               data-testid="hero-title"
             >
-              {t('نبني', 'We Build')}
-              <br />
+              {t('نبني ', 'We Build ')}
               <span className="text-gradient">{t('المستقبل', 'The Future')}</span>
             </motion.h1>
 

@@ -16,7 +16,7 @@ const TeamSection = () => {
   ];
 
   return (
-    <section id="team" className="py-20 md:py-32 bg-[#21242D] relative overflow-hidden">
+    <section id="team" data-testid="team-section" className="py-20 md:py-32 bg-[#21242D] relative overflow-hidden">
       {/* Background */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#3B4961]/10 rounded-full blur-3xl" />
       

@@ -75,8 +75,10 @@ const Navbar = () => {
               onClick={toggleLanguage}
               className="text-[#A6A39D] hover:text-[#CBCCC8] hover:bg-[#3B4961]/30"
               data-testid="language-toggle"
+              aria-label="Toggle language"
             >
               <Globe className="w-5 h-5" />
+              <span className="sr-only">{isRTL ? 'EN' : 'AR'}</span>
             </Button>
             
             <Button
