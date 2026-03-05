@@ -53,11 +53,13 @@ const TeamSection = () => {
             >
               <div className="relative mb-6 inline-block">
                 <div className="absolute inset-0 bg-[#3B4961]/30 rounded-full blur-xl scale-90 group-hover:scale-100 transition-transform" />
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-40 h-40 rounded-full object-cover relative z-10 border-4 border-[#3B4961]/30 mx-auto"
-                />
+                <div className="w-40 h-40 rounded-full overflow-hidden relative z-10 border-4 border-[#3B4961]/30 mx-auto">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover object-[center_15%] scale-[1.8]"
+                  />
+                </div>
               </div>
               
               <h3 className="text-xl font-semibold text-[#CBCCC8] mb-2">
