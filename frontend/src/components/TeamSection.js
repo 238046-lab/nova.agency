@@ -1,0 +1,91 @@
+import React from 'react';
+import { useLanguage } from '../context/LanguageContext';
+import { motion } from 'framer-motion';
+import { Linkedin, Twitter } from 'lucide-react';
+
+const TeamSection = () => {
+  const { t } = useLanguage();
+
+  const team = [
+    {
+      name: t('صمود السلامين', 'Sumood Salameen'),
+      role: t('المديرة التنفيذية ومطورة البرمجيات', 'CEO & Software Developer'),
+      image: 'https://img.freepik.com/free-vector/hijab-woman-character_603843-1099.jpg',
+      bio: t('خبيرة في تطوير البرمجيات وقيادة المشاريع التقنية', 'Expert in software development and technical project leadership')
+    }
+  ];
+
+  return (
+    <section id="team" className="py-20 md:py-32 bg-[#21242D] relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#3B4961]/10 rounded-full blur-3xl" />
+      
+      <div className="container mx-auto px-4 md:px-8 max-w-7xl relative z-10">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-5xl font-semibold text-[#CBCCC8] mb-4" data-testid="team-title">
+            {t('فريقنا', 'Our Team')}
+          </h2>
+          <p className="text-base md:text-lg text-[#A6A39D] max-w-2xl mx-auto">
+            {t(
+              'فريق من الخبراء المتخصصين في التقنية والإبداع لتحويل رؤيتك إلى واقع',
+              'A team of experts specialized in technology and creativity to turn your vision into reality'
+            )}
+          </p>
+        </motion.div>
+
+        {/* Team Grid */}
+        <div className="flex justify-center">
+          {team.map((member, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="glass-card p-8 text-center max-w-sm hover:bg-[#3B4961]/20 hover:border-[#3B4961] transition-all duration-300 hover-glow group"
+              data-testid={`team-member-${index}`}
+            >
+              <div className="relative mb-6 inline-block">
+                <div className="absolute inset-0 bg-[#3B4961]/30 rounded-full blur-xl scale-90 group-hover:scale-100 transition-transform" />
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-40 h-40 rounded-full object-cover relative z-10 border-4 border-[#3B4961]/30 mx-auto"
+                />
+              </div>
+              
+              <h3 className="text-xl font-semibold text-[#CBCCC8] mb-2">
+                {member.name}
+              </h3>
+              
+              <p className="text-[#3B4961] font-medium text-sm mb-3">
+                {member.role}
+              </p>
+              
+              <p className="text-[#A6A39D] text-sm mb-6">
+                {member.bio}
+              </p>
+
+              <div className="flex justify-center gap-3">
+                <button className="p-2 bg-[#3B4961]/30 rounded-lg hover:bg-[#3B4961]/50 transition-colors">
+                  <Linkedin className="w-5 h-5 text-[#CBCCC8]" />
+                </button>
+                <button className="p-2 bg-[#3B4961]/30 rounded-lg hover:bg-[#3B4961]/50 transition-colors">
+                  <Twitter className="w-5 h-5 text-[#CBCCC8]" />
+                </button>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default TeamSection;
