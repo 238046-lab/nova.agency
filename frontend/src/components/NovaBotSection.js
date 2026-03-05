@@ -78,7 +78,7 @@ const NovaBotSection = () => {
 
             <Button
               onClick={() => window.open('https://wa.me/972592128272', '_blank')}
-              className="bg-[#3B4961] hover:bg-[#3B4961]/80 text-[#CBCCC8] rounded-lg px-8 py-6 text-lg hover-glow"
+              className="bg-[#00D4FF] hover:bg-[#00D4FF]/80 text-[#21242D] font-semibold rounded-lg px-8 py-6 text-lg hover-glow"
               data-testid="bot-cta"
             >
               {t('تحدث مع Nova Bot', 'Chat with Nova Bot')}
@@ -97,13 +97,13 @@ const NovaBotSection = () => {
             <div className="glass-card p-8 rounded-3xl border border-[#3B4961]/30">
               {/* Chat Header */}
               <div className="flex items-center gap-3 pb-6 border-b border-[#3B4961]/30 mb-6">
-                <div className="w-12 h-12 bg-[#3B4961] rounded-full flex items-center justify-center">
-                  <Bot className="w-6 h-6 text-[#CBCCC8]" />
+                <div className="w-12 h-12 bg-[#00D4FF] rounded-full flex items-center justify-center">
+                  <Bot className="w-6 h-6 text-[#21242D]" />
                 </div>
                 <div>
                   <h4 className="text-[#CBCCC8] font-medium">Nova Bot</h4>
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                    <span className="w-2 h-2 bg-[#00D4FF] rounded-full animate-pulse" />
                     <span className="text-xs text-[#A6A39D]">{t('متصل الآن', 'Online')}</span>
                   </div>
                 </div>
@@ -154,7 +154,7 @@ const NovaBotSection = () => {
                   <span className="text-[#72706C] text-sm flex-1">
                     {t('اكتب رسالتك...', 'Type your message...')}
                   </span>
-                  <Button size="icon" className="bg-[#3B4961] hover:bg-[#3B4961]/80 rounded-lg">
+                  <Button size="icon" className="bg-[#00D4FF] hover:bg-[#00D4FF]/80 rounded-lg">
                     <ArrowRight className={`w-4 h-4 ${isRTL ? 'rotate-180' : ''}`} />
                   </Button>
                 </div>

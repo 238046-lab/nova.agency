@@ -38,17 +38,17 @@ const AboutSection = () => {
 
             <div className="mt-8 flex items-center gap-8">
               <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-[#CBCCC8]">50+</div>
+                <div className="text-3xl md:text-4xl font-bold text-[#00D4FF]">50+</div>
                 <div className="text-sm text-[#A6A39D]">{t('مشروع منجز', 'Projects')}</div>
               </div>
               <div className="w-px h-12 bg-[#3B4961]" />
               <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-[#CBCCC8]">30+</div>
+                <div className="text-3xl md:text-4xl font-bold text-[#00D4FF]">30+</div>
                 <div className="text-sm text-[#A6A39D]">{t('عميل سعيد', 'Happy Clients')}</div>
               </div>
               <div className="w-px h-12 bg-[#3B4961]" />
               <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-[#CBCCC8]">3+</div>
+                <div className="text-3xl md:text-4xl font-bold text-[#00D4FF]">3+</div>
                 <div className="text-sm text-[#A6A39D]">{t('سنوات خبرة', 'Years')}</div>
               </div>
             </div>
@@ -93,8 +93,8 @@ const AboutSection = () => {
                 data-testid={`value-card-${index}`}
               >
                 <div className="flex items-start gap-4">
-                  <div className="p-3 bg-[#3B4961]/30 rounded-xl">
-                    <value.icon className="w-6 h-6 text-[#CBCCC8]" />
+                  <div className="p-3 bg-[#00D4FF]/20 rounded-xl">
+                    <value.icon className="w-6 h-6 text-[#00D4FF]" />
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold text-[#CBCCC8] mb-2">{value.title}</h4>

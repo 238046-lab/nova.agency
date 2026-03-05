@@ -50,9 +50,9 @@ const Footer = () => {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-[#3B4961]/30 rounded-lg hover:bg-[#3B4961]/50 transition-colors"
+                className="p-2 bg-[#00D4FF]/20 rounded-lg hover:bg-[#00D4FF]/30 transition-colors"
               >
-                <social.icon className="w-5 h-5 text-[#CBCCC8]" />
+                <social.icon className="w-5 h-5 text-[#00D4FF]" />
               </a>
             ))}
           </div>

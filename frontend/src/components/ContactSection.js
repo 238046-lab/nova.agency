@@ -192,7 +192,7 @@ const ContactSection = () => {
                 <Button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-[#3B4961] hover:bg-[#3B4961]/80 text-[#CBCCC8] rounded-lg py-6 text-lg hover-glow"
+                  className="w-full bg-[#00D4FF] hover:bg-[#00D4FF]/80 text-[#21242D] font-semibold rounded-lg py-6 text-lg hover-glow"
                   data-testid="contact-submit-btn"
                 >
                   {isLoading ? (
@@ -232,8 +232,8 @@ const ContactSection = () => {
                     className="flex items-start gap-4 group"
                     data-testid={`contact-info-${index}`}
                   >
-                    <div className="p-3 bg-[#3B4961]/30 rounded-xl group-hover:bg-[#3B4961]/50 transition-colors">
-                      <info.icon className="w-6 h-6 text-[#CBCCC8]" />
+                    <div className="p-3 bg-[#00D4FF]/20 rounded-xl group-hover:bg-[#00D4FF]/30 transition-colors">
+                      <info.icon className="w-6 h-6 text-[#00D4FF]" />
                     </div>
                     <div>
                       <p className="text-sm text-[#72706C] mb-1">{info.title}</p>

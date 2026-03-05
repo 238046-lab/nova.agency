@@ -76,7 +76,7 @@ const HeroSection = () => {
             >
               <Button
                 onClick={() => scrollToSection('#contact')}
-                className="bg-[#3B4961] hover:bg-[#3B4961]/80 text-[#CBCCC8] rounded-lg px-8 py-6 text-lg hover-glow"
+                className="bg-[#00D4FF] hover:bg-[#00D4FF]/80 text-[#21242D] font-semibold rounded-lg px-8 py-6 text-lg hover-glow"
                 data-testid="hero-cta-start"
               >
                 {t('ابدأ مشروعك', 'Start Your Project')}
@@ -84,7 +84,7 @@ const HeroSection = () => {
               <Button
                 onClick={() => scrollToSection('#nova-bot')}
                 variant="outline"
-                className="border-[#3B4961] text-[#CBCCC8] hover:bg-[#3B4961]/20 rounded-lg px-8 py-6 text-lg"
+                className="border-[#00D4FF] text-[#00D4FF] hover:bg-[#00D4FF]/10 rounded-lg px-8 py-6 text-lg"
                 data-testid="hero-cta-bot"
               >
                 <Bot className="w-5 h-5 me-2" />

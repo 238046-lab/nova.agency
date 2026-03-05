@@ -83,7 +83,7 @@ const Navbar = () => {
             
             <Button
               onClick={() => scrollToSection('#contact')}
-              className="hidden md:flex bg-[#3B4961] hover:bg-[#3B4961]/80 text-[#CBCCC8] rounded-lg px-6"
+              className="hidden md:flex bg-[#00D4FF] hover:bg-[#00D4FF]/80 text-[#21242D] font-semibold rounded-lg px-6"
               data-testid="nav-cta"
             >
               {t('ابدأ مشروعك', 'Start Project')}
@@ -125,7 +125,7 @@ const Navbar = () => {
               ))}
               <Button
                 onClick={() => scrollToSection('#contact')}
-                className="bg-[#3B4961] hover:bg-[#3B4961]/80 text-[#CBCCC8] rounded-lg mt-2"
+                className="bg-[#00D4FF] hover:bg-[#00D4FF]/80 text-[#21242D] font-semibold rounded-lg mt-2"
                 data-testid="mobile-nav-cta"
               >
                 {t('ابدأ مشروعك', 'Start Project')}

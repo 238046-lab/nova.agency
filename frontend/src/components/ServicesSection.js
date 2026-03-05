@@ -71,11 +71,11 @@ const ServicesSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="glass-card p-8 hover:bg-[#3B4961]/20 hover:border-[#3B4961] transition-all duration-300 hover-glow group"
+                className="glass-card p-8 hover:bg-[#3B4961]/20 hover:border-[#00D4FF]/50 transition-all duration-300 hover-glow group"
                 data-testid={`service-card-${index}`}
               >
-                <div className="p-4 bg-[#3B4961]/30 rounded-2xl w-fit mb-6 group-hover:bg-[#3B4961]/50 transition-colors">
-                  <IconComponent className="w-8 h-8 text-[#CBCCC8]" />
+                <div className="p-4 bg-[#00D4FF]/20 rounded-2xl w-fit mb-6 group-hover:bg-[#00D4FF]/30 transition-colors">
+                  <IconComponent className="w-8 h-8 text-[#00D4FF]" />
                 </div>
                 
                 <h3 className="text-xl font-semibold text-[#CBCCC8] mb-3">
@@ -88,7 +88,7 @@ const ServicesSection = () => {
                 
                 <div className="flex items-center justify-between pt-4 border-t border-[#3B4961]/30">
                   <span className="text-xs text-[#72706C]">{t('تبدأ من', 'Starting from')}</span>
-                  <span className="text-2xl font-bold text-[#CBCCC8]">{service.price}</span>
+                  <span className="text-2xl font-bold text-[#00D4FF]">{service.price}</span>
                 </div>
               </motion.div>
             );

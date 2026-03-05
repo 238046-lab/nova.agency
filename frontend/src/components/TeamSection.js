@@ -66,7 +66,7 @@ const TeamSection = () => {
                 {member.name}
               </h3>
               
-              <p className="text-[#3B4961] font-medium text-sm mb-3">
+              <p className="text-[#00D4FF] font-medium text-sm mb-3">
                 {member.role}
               </p>
               
@@ -79,17 +79,17 @@ const TeamSection = () => {
                   href="https://wa.me/972592128272" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="p-2 bg-[#3B4961]/30 rounded-lg hover:bg-[#3B4961]/50 transition-colors"
+                  className="p-2 bg-[#00D4FF]/20 rounded-lg hover:bg-[#00D4FF]/30 transition-colors"
                 >
-                  <FaWhatsapp className="w-5 h-5 text-[#CBCCC8]" />
+                  <FaWhatsapp className="w-5 h-5 text-[#00D4FF]" />
                 </a>
                 <a 
                   href="https://www.instagram.com/nova.co.web?igsh=c2w1NjQ2OWMxcWY1" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="p-2 bg-[#3B4961]/30 rounded-lg hover:bg-[#3B4961]/50 transition-colors"
+                  className="p-2 bg-[#00D4FF]/20 rounded-lg hover:bg-[#00D4FF]/30 transition-colors"
                 >
-                  <FaInstagram className="w-5 h-5 text-[#CBCCC8]" />
+                  <FaInstagram className="w-5 h-5 text-[#00D4FF]" />
                 </a>
               </div>
             </motion.div>
