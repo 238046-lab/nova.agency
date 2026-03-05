@@ -18,13 +18,13 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="py-12 bg-[#21242D] border-t border-[#3B4961]/30">
+    <footer className="py-12 bg-[#1C2B48] border-t border-[#8EB1D1]/20">
       <div className="container mx-auto px-4 md:px-8 max-w-7xl">
         <div className="grid md:grid-cols-3 gap-8 items-center">
           {/* Logo */}
           <div>
-            <a href="#" className="text-2xl font-bold text-[#CBCCC8]">Nova</a>
-            <p className="text-sm text-[#A6A39D] mt-2">
+            <a href="#" className="text-2xl font-bold text-[#E8ECEF]">Nova</a>
+            <p className="text-sm text-[#C4D8E5] mt-2">
               {t('نبني المستقبل الرقمي', 'Building the digital future')}
             </p>
           </div>
@@ -35,7 +35,7 @@ const Footer = () => {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm text-[#A6A39D] hover:text-[#CBCCC8] transition-colors"
+                className="text-sm text-[#C4D8E5] hover:text-[#E8ECEF] transition-colors"
               >
                 {link.label}
               </a>
@@ -50,16 +50,16 @@ const Footer = () => {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-[#00D4FF]/20 rounded-lg hover:bg-[#00D4FF]/30 transition-colors"
+                className="p-2 bg-[#8EB1D1]/20 rounded-lg hover:bg-[#8EB1D1]/30 transition-colors"
               >
-                <social.icon className="w-5 h-5 text-[#00D4FF]" />
+                <social.icon className="w-5 h-5 text-[#8EB1D1]" />
               </a>
             ))}
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-[#3B4961]/30 text-center">
-          <p className="text-sm text-[#72706C]">
+        <div className="mt-8 pt-8 border-t border-[#8EB1D1]/20 text-center">
+          <p className="text-sm text-[#C4D8E5]">
             © {new Date().getFullYear()} Nova. {t('جميع الحقوق محفوظة', 'All rights reserved')}
           </p>
         </div>

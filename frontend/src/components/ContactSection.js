@@ -68,10 +68,10 @@ const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 md:py-32 bg-[#21242D] relative overflow-hidden">
+    <section id="contact" className="py-20 md:py-32 bg-[#1C2B48] relative overflow-hidden">
       {/* Background */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#3B4961]/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#3B4961]/10 rounded-full blur-3xl" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#8EB1D1]/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#A7C7E7]/10 rounded-full blur-3xl" />
       
       <div className="container mx-auto px-4 md:px-8 max-w-7xl relative z-10">
         {/* Header */}
@@ -81,10 +81,10 @@ const ContactSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-semibold text-[#CBCCC8] mb-4" data-testid="contact-title">
+          <h2 className="text-3xl md:text-5xl font-semibold text-[#E8ECEF] mb-4" data-testid="contact-title">
             {t('تواصل معنا', 'Get In Touch')}
           </h2>
-          <p className="text-base md:text-lg text-[#A6A39D] max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-[#C4D8E5] max-w-2xl mx-auto">
             {t(
               'نحن هنا لمساعدتك. تواصل معنا لبدء مشروعك الرقمي',
               'We are here to help. Contact us to start your digital project'
@@ -103,7 +103,7 @@ const ContactSection = () => {
               <form onSubmit={handleSubmit} className="space-y-6" data-testid="contact-form">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[#CBCCC8] text-sm mb-2">
+                    <label className="block text-[#E8ECEF] text-sm mb-2">
                       {t('الاسم', 'Name')} *
                     </label>
                     <Input
@@ -111,13 +111,13 @@ const ContactSection = () => {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="bg-[#21242D] border-[#3B4961]/50 text-[#CBCCC8] focus:border-[#3B4961] rounded-lg"
+                      className="bg-[#1C2B48] border-[#8EB1D1]/30 text-[#E8ECEF] focus:border-[#8EB1D1] rounded-lg"
                       placeholder={t('أدخل اسمك', 'Enter your name')}
                       data-testid="contact-name-input"
                     />
                   </div>
                   <div>
-                    <label className="block text-[#CBCCC8] text-sm mb-2">
+                    <label className="block text-[#E8ECEF] text-sm mb-2">
                       {t('البريد الإلكتروني', 'Email')} *
                     </label>
                     <Input
@@ -125,7 +125,7 @@ const ContactSection = () => {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="bg-[#21242D] border-[#3B4961]/50 text-[#CBCCC8] focus:border-[#3B4961] rounded-lg"
+                      className="bg-[#1C2B48] border-[#8EB1D1]/30 text-[#E8ECEF] focus:border-[#8EB1D1] rounded-lg"
                       placeholder={t('أدخل بريدك الإلكتروني', 'Enter your email')}
                       data-testid="contact-email-input"
                     />
@@ -134,20 +134,20 @@ const ContactSection = () => {
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[#CBCCC8] text-sm mb-2">
+                    <label className="block text-[#E8ECEF] text-sm mb-2">
                       {t('رقم الهاتف', 'Phone')}
                     </label>
                     <Input
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="bg-[#21242D] border-[#3B4961]/50 text-[#CBCCC8] focus:border-[#3B4961] rounded-lg"
+                      className="bg-[#1C2B48] border-[#8EB1D1]/30 text-[#E8ECEF] focus:border-[#8EB1D1] rounded-lg"
                       placeholder={t('أدخل رقم هاتفك', 'Enter your phone')}
                       data-testid="contact-phone-input"
                     />
                   </div>
                   <div>
-                    <label className="block text-[#CBCCC8] text-sm mb-2">
+                    <label className="block text-[#E8ECEF] text-sm mb-2">
                       {t('الخدمة المطلوبة', 'Service')}
                     </label>
                     <Select
@@ -155,17 +155,17 @@ const ContactSection = () => {
                       onValueChange={(value) => setFormData({ ...formData, service: value })}
                     >
                       <SelectTrigger 
-                        className="bg-[#21242D] border-[#3B4961]/50 text-[#CBCCC8] focus:border-[#3B4961] rounded-lg"
+                        className="bg-[#1C2B48] border-[#8EB1D1]/30 text-[#E8ECEF] focus:border-[#8EB1D1] rounded-lg"
                         data-testid="contact-service-select"
                       >
                         <SelectValue placeholder={t('اختر الخدمة', 'Select service')} />
                       </SelectTrigger>
-                      <SelectContent className="bg-[#21242D] border-[#3B4961]">
+                      <SelectContent className="bg-[#1C2B48] border-[#8EB1D1]/30">
                         {services.map((service) => (
                           <SelectItem 
                             key={service.value} 
                             value={service.value}
-                            className="text-[#CBCCC8] focus:bg-[#3B4961]/30"
+                            className="text-[#E8ECEF] focus:bg-[#8EB1D1]/20"
                           >
                             {service.label}
                           </SelectItem>
@@ -176,14 +176,14 @@ const ContactSection = () => {
                 </div>
 
                 <div>
-                  <label className="block text-[#CBCCC8] text-sm mb-2">
+                  <label className="block text-[#E8ECEF] text-sm mb-2">
                     {t('رسالتك', 'Message')} *
                   </label>
                   <Textarea
                     required
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="bg-[#21242D] border-[#3B4961]/50 text-[#CBCCC8] focus:border-[#3B4961] rounded-lg min-h-[150px]"
+                    className="bg-[#1C2B48] border-[#8EB1D1]/30 text-[#E8ECEF] focus:border-[#8EB1D1] rounded-lg min-h-[150px]"
                     placeholder={t('اكتب رسالتك هنا...', 'Write your message here...')}
                     data-testid="contact-message-input"
                   />
@@ -192,7 +192,7 @@ const ContactSection = () => {
                 <Button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-[#00D4FF] hover:bg-[#00D4FF]/80 text-[#21242D] font-semibold rounded-lg py-6 text-lg hover-glow"
+                  className="w-full bg-[#8EB1D1] hover:bg-[#A7C7E7] text-[#1C2B48] font-semibold rounded-lg py-6 text-lg hover-glow"
                   data-testid="contact-submit-btn"
                 >
                   {isLoading ? (
@@ -219,7 +219,7 @@ const ContactSection = () => {
             className="space-y-6"
           >
             <div className="glass-card p-8 rounded-2xl mb-8">
-              <h3 className="text-xl font-semibold text-[#CBCCC8] mb-6">
+              <h3 className="text-xl font-semibold text-[#E8ECEF] mb-6">
                 {t('معلومات التواصل', 'Contact Information')}
               </h3>
               <div className="space-y-6">
@@ -232,12 +232,12 @@ const ContactSection = () => {
                     className="flex items-start gap-4 group"
                     data-testid={`contact-info-${index}`}
                   >
-                    <div className="p-3 bg-[#00D4FF]/20 rounded-xl group-hover:bg-[#00D4FF]/30 transition-colors">
-                      <info.icon className="w-6 h-6 text-[#00D4FF]" />
+                    <div className="p-3 bg-[#8EB1D1]/20 rounded-xl group-hover:bg-[#8EB1D1]/30 transition-colors">
+                      <info.icon className="w-6 h-6 text-[#8EB1D1]" />
                     </div>
                     <div>
-                      <p className="text-sm text-[#72706C] mb-1">{info.title}</p>
-                      <p className="text-[#CBCCC8] group-hover:text-white transition-colors">{info.value}</p>
+                      <p className="text-sm text-[#C4D8E5] mb-1">{info.title}</p>
+                      <p className="text-[#E8ECEF] group-hover:text-[#A7C7E7] transition-colors">{info.value}</p>
                     </div>
                   </a>
                 ))}

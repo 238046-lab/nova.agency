@@ -5,12 +5,12 @@
 @tailwind utilities;
 
 :root {
-  --nova-bg: #21242D;
-  --nova-text-warm: #A6A39D;
-  --nova-text-silver: #CBCCC8;
-  --nova-interactive: #3B4961;
-  --nova-accent: #72706C;
-  --nova-primary: #00D4FF;
+  --nova-bg: #1C2B48;
+  --nova-text-warm: #C4D8E5;
+  --nova-text-silver: #E8ECEF;
+  --nova-interactive: #8EB1D1;
+  --nova-accent: #A7C7E7;
+  --nova-primary: #8EB1D1;
   --nova-success: #10B981;
   --nova-error: #EF4444;
 }
@@ -95,21 +95,21 @@ body {
     @apply border-border;
   }
   body {
-    @apply bg-[#21242D] text-[#CBCCC8];
+    @apply bg-[#1C2B48] text-[#E8ECEF];
   }
 }
 
 @layer utilities {
   .glass-card {
-    @apply bg-[#21242D]/80 backdrop-blur-xl border border-[#3B4961]/30 rounded-2xl;
+    @apply bg-[#1C2B48]/80 backdrop-blur-xl border border-[#8EB1D1]/20 rounded-2xl;
   }
   
   .nova-gradient {
-    background: linear-gradient(135deg, #00D4FF 0%, #3B4961 100%);
+    background: linear-gradient(135deg, #8EB1D1 0%, #A7C7E7 100%);
   }
   
   .text-gradient {
-    background: linear-gradient(135deg, #00D4FF 0%, #CBCCC8 100%);
+    background: linear-gradient(135deg, #8EB1D1 0%, #A7C7E7 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -120,7 +120,7 @@ body {
   }
   
   .hover-glow:hover {
-    box-shadow: 0 0 30px -10px rgba(0, 212, 255, 0.5);
+    box-shadow: 0 0 30px -10px rgba(142, 177, 209, 0.5);
   }
 }
 

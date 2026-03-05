@@ -16,7 +16,7 @@ import WhatsAppButton from "./components/WhatsAppButton";
 function App() {
   return (
     <LanguageProvider>
-      <div className="min-h-screen bg-[#21242D]" data-testid="nova-app">
+      <div className="min-h-screen bg-[#1C2B48]" data-testid="nova-app">
         <Navbar />
         <main>
           <HeroSection />

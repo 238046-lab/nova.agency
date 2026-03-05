@@ -15,12 +15,12 @@ const HeroSection = () => {
   };
 
   return (
-    <section id="hero" className="min-h-screen flex items-center relative overflow-hidden bg-[#21242D]">
+    <section id="hero" className="min-h-screen flex items-center relative overflow-hidden bg-[#1C2B48]">
       {/* Background elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-[#3B4961]/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#3B4961]/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#3B4961]/5 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-[#8EB1D1]/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#A7C7E7]/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#8EB1D1]/5 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 md:px-8 max-w-7xl relative z-10">
@@ -36,10 +36,10 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 bg-[#3B4961]/30 px-4 py-2 rounded-full mb-6"
+              className="inline-flex items-center gap-2 bg-[#8EB1D1]/20 px-4 py-2 rounded-full mb-6"
             >
-              <Sparkles className="w-4 h-4 text-[#CBCCC8]" />
-              <span className="text-sm text-[#A6A39D]">
+              <Sparkles className="w-4 h-4 text-[#A7C7E7]" />
+              <span className="text-sm text-[#C4D8E5]">
                 {t('وكالة رقمية متكاملة', 'Full-Service Digital Agency')}
               </span>
             </motion.div>
@@ -48,7 +48,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#CBCCC8] leading-tight mb-6"
+              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#E8ECEF] leading-tight mb-6"
               data-testid="hero-title"
             >
               {t('نبني ', 'We Build ')}
@@ -59,7 +59,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="text-base md:text-lg text-[#A6A39D] mb-8 max-w-xl leading-relaxed"
+              className="text-base md:text-lg text-[#C4D8E5] mb-8 max-w-xl leading-relaxed"
               data-testid="hero-description"
             >
               {t(
@@ -76,7 +76,7 @@ const HeroSection = () => {
             >
               <Button
                 onClick={() => scrollToSection('#contact')}
-                className="bg-[#00D4FF] hover:bg-[#00D4FF]/80 text-[#21242D] font-semibold rounded-lg px-8 py-6 text-lg hover-glow"
+                className="bg-[#8EB1D1] hover:bg-[#A7C7E7] text-[#1C2B48] font-semibold rounded-lg px-8 py-6 text-lg hover-glow"
                 data-testid="hero-cta-start"
               >
                 {t('ابدأ مشروعك', 'Start Your Project')}
@@ -84,7 +84,7 @@ const HeroSection = () => {
               <Button
                 onClick={() => scrollToSection('#nova-bot')}
                 variant="outline"
-                className="border-[#00D4FF] text-[#00D4FF] hover:bg-[#00D4FF]/10 rounded-lg px-8 py-6 text-lg"
+                className="border-[#8EB1D1] text-[#A7C7E7] hover:bg-[#8EB1D1]/10 rounded-lg px-8 py-6 text-lg"
                 data-testid="hero-cta-bot"
               >
                 <Bot className="w-5 h-5 me-2" />
@@ -102,7 +102,7 @@ const HeroSection = () => {
           >
             <div className="relative">
               {/* Glow effect */}
-              <div className="absolute inset-0 bg-[#3B4961]/30 rounded-full blur-3xl scale-75" />
+              <div className="absolute inset-0 bg-[#8EB1D1]/30 rounded-full blur-3xl scale-75" />
               
               {/* Robot image */}
               <motion.img
@@ -120,7 +120,7 @@ const HeroSection = () => {
                 animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               >
-                <Bot className="w-8 h-8 text-[#3B4961]" />
+                <Bot className="w-8 h-8 text-[#8EB1D1]" />
               </motion.div>
 
               <motion.div
@@ -128,7 +128,7 @@ const HeroSection = () => {
                 animate={{ y: [0, 10, 0], rotate: [0, -5, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
               >
-                <Sparkles className="w-8 h-8 text-[#CBCCC8]" />
+                <Sparkles className="w-8 h-8 text-[#A7C7E7]" />
               </motion.div>
             </div>
           </motion.div>
@@ -147,7 +147,7 @@ const HeroSection = () => {
             className="cursor-pointer"
             onClick={() => scrollToSection('#about')}
           >
-            <ArrowDown className="w-6 h-6 text-[#A6A39D]" />
+            <ArrowDown className="w-6 h-6 text-[#C4D8E5]" />
           </motion.div>
         </motion.div>
       </div>

@@ -1,15 +1,12 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { motion } from 'framer-motion';
-import { Briefcase, ShoppingCart, Settings, Bot, Palette, Share2 } from 'lucide-react';
+import { Briefcase, ShoppingCart, Settings } from 'lucide-react';
 
 const iconMap = {
   Briefcase,
   ShoppingCart,
-  Settings,
-  Bot,
-  Palette,
-  Share2
+  Settings
 };
 
 const ServicesSection = () => {
@@ -37,9 +34,9 @@ const ServicesSection = () => {
   ];
 
   return (
-    <section id="services" className="py-20 md:py-32 bg-[#21242D] relative overflow-hidden">
+    <section id="services" className="py-20 md:py-32 bg-[#1C2B48] relative overflow-hidden">
       {/* Background */}
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#3B4961]/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#A7C7E7]/10 rounded-full blur-3xl" />
       
       <div className="container mx-auto px-4 md:px-8 max-w-7xl relative z-10">
         {/* Header */}
@@ -49,10 +46,10 @@ const ServicesSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-semibold text-[#CBCCC8] mb-4" data-testid="services-title">
+          <h2 className="text-3xl md:text-5xl font-semibold text-[#E8ECEF] mb-4" data-testid="services-title">
             {t('خدماتنا', 'Our Services')}
           </h2>
-          <p className="text-base md:text-lg text-[#A6A39D] max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-[#C4D8E5] max-w-2xl mx-auto">
             {t(
               'نقدم مجموعة شاملة من الخدمات الرقمية لمساعدتك على بناء حضور رقمي قوي',
               'We offer a comprehensive range of digital services to help you build a strong digital presence'
@@ -71,24 +68,24 @@ const ServicesSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="glass-card p-8 hover:bg-[#3B4961]/20 hover:border-[#00D4FF]/50 transition-all duration-300 hover-glow group"
+                className="glass-card p-8 hover:bg-[#8EB1D1]/10 hover:border-[#8EB1D1]/40 transition-all duration-300 hover-glow group"
                 data-testid={`service-card-${index}`}
               >
-                <div className="p-4 bg-[#00D4FF]/20 rounded-2xl w-fit mb-6 group-hover:bg-[#00D4FF]/30 transition-colors">
-                  <IconComponent className="w-8 h-8 text-[#00D4FF]" />
+                <div className="p-4 bg-[#8EB1D1]/20 rounded-2xl w-fit mb-6 group-hover:bg-[#8EB1D1]/30 transition-colors">
+                  <IconComponent className="w-8 h-8 text-[#8EB1D1]" />
                 </div>
                 
-                <h3 className="text-xl font-semibold text-[#CBCCC8] mb-3">
+                <h3 className="text-xl font-semibold text-[#E8ECEF] mb-3">
                   {service.name}
                 </h3>
                 
-                <p className="text-[#A6A39D] text-sm mb-6 leading-relaxed">
+                <p className="text-[#C4D8E5] text-sm mb-6 leading-relaxed">
                   {service.desc}
                 </p>
                 
-                <div className="flex items-center justify-between pt-4 border-t border-[#3B4961]/30">
-                  <span className="text-xs text-[#72706C]">{t('تبدأ من', 'Starting from')}</span>
-                  <span className="text-2xl font-bold text-[#00D4FF]">{service.price}</span>
+                <div className="flex items-center justify-between pt-4 border-t border-[#8EB1D1]/20">
+                  <span className="text-xs text-[#C4D8E5]">{t('تبدأ من', 'Starting from')}</span>
+                  <span className="text-2xl font-bold text-[#8EB1D1]">{service.price}</span>
                 </div>
               </motion.div>
             );

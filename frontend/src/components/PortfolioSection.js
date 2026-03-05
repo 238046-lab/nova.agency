@@ -28,9 +28,9 @@ const PortfolioSection = () => {
   ];
 
   return (
-    <section id="portfolio" className="py-20 md:py-32 bg-[#21242D] relative overflow-hidden">
+    <section id="portfolio" className="py-20 md:py-32 bg-[#1C2B48] relative overflow-hidden">
       {/* Background */}
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#3B4961]/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#A7C7E7]/10 rounded-full blur-3xl" />
       
       <div className="container mx-auto px-4 md:px-8 max-w-7xl relative z-10">
         {/* Header */}
@@ -40,10 +40,10 @@ const PortfolioSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-semibold text-[#CBCCC8] mb-4" data-testid="portfolio-title">
+          <h2 className="text-3xl md:text-5xl font-semibold text-[#E8ECEF] mb-4" data-testid="portfolio-title">
             {t('أعمالنا', 'Our Work')}
           </h2>
-          <p className="text-base md:text-lg text-[#A6A39D] max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-[#C4D8E5] max-w-2xl mx-auto">
             {t(
               'نماذج من المشاريع التي نفتخر بإنجازها لعملائنا',
               'Samples of projects we are proud to have completed for our clients'
@@ -69,24 +69,24 @@ const PortfolioSection = () => {
                   alt={project.title}
                   className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#21242D] to-transparent opacity-60" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1C2B48] to-transparent opacity-60" />
                 <div className="absolute top-4 left-4">
-                  <span className="bg-[#3B4961]/80 backdrop-blur-sm text-[#CBCCC8] text-xs px-3 py-1 rounded-full">
+                  <span className="bg-[#8EB1D1]/80 backdrop-blur-sm text-[#1C2B48] text-xs px-3 py-1 rounded-full font-medium">
                     {project.category}
                   </span>
                 </div>
                 <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="p-2 bg-[#3B4961]/80 backdrop-blur-sm rounded-lg">
-                    <ExternalLink className="w-4 h-4 text-[#CBCCC8]" />
+                  <div className="p-2 bg-[#8EB1D1]/80 backdrop-blur-sm rounded-lg">
+                    <ExternalLink className="w-4 h-4 text-[#1C2B48]" />
                   </div>
                 </div>
               </div>
               
               <div className="p-6">
-                <h3 className="text-lg font-semibold text-[#CBCCC8] mb-2 group-hover:text-white transition-colors">
+                <h3 className="text-lg font-semibold text-[#E8ECEF] mb-2 group-hover:text-[#A7C7E7] transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-[#A6A39D] text-sm">
+                <p className="text-[#C4D8E5] text-sm">
                   {project.desc}
                 </p>
               </div>
