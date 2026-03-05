@@ -10,7 +10,7 @@ const TeamSection = () => {
     {
       name: t('صمود السلامين', 'Sumood Salameen'),
       role: t('المديرة التنفيذية ومطورة البرمجيات', 'CEO & Software Developer'),
-      image: 'https://img.freepik.com/free-vector/hijab-woman-character_603843-1099.jpg?w=400',
+      image: 'https://customer-assets.emergentagent.com/job_nova-agency-2/artifacts/ql0l3ln5_1000311052.jpg',
       bio: t('خبيرة في تطوير البرمجيات وقيادة المشاريع التقنية', 'Expert in software development and technical project leadership')
     }
   ];
