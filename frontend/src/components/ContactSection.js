@@ -27,9 +27,6 @@ const ContactSection = () => {
     { value: 'portfolio', label: t('موقع بورتفوليو', 'Portfolio Website') },
     { value: 'ecommerce', label: t('متجر إلكتروني', 'E-commerce Store') },
     { value: 'custom', label: t('نظام مخصص', 'Custom System') },
-    { value: 'ai', label: t('أتمتة وذكاء اصطناعي', 'AI & Automation') },
-    { value: 'identity', label: t('هوية بصرية', 'Visual Identity') },
-    { value: 'social', label: t('إدارة التواصل الاجتماعي', 'Social Media') },
     { value: 'other', label: t('أخرى', 'Other') }
   ];
 
