@@ -1,0 +1,100 @@
+{
+  "design_system": {
+    "brand_name": "Nova",
+    "theme": "dark",
+    "color_palette": {
+      "primary": {
+        "background": "#21242D",
+        "foreground": "#CBCCC8",
+        "interactive": "#3B4961",
+        "accent": "#72706C"
+      },
+      "secondary": {
+        "text_warm": "#A6A39D",
+        "text_silver": "#CBCCC8"
+      },
+      "functional": {
+        "success": "#10B981",
+        "error": "#EF4444",
+        "warning": "#F59E0B"
+      }
+    },
+    "typography": {
+      "font_family": {
+        "arabic": "Cairo, sans-serif",
+        "english": "Space Grotesk, sans-serif"
+      },
+      "scale": {
+        "h1": "text-5xl md:text-7xl font-bold tracking-tight",
+        "h2": "text-3xl md:text-5xl font-semibold tracking-tight",
+        "h3": "text-2xl md:text-3xl font-medium",
+        "body": "text-base md:text-lg leading-relaxed text-[#A6A39D]"
+      }
+    },
+    "layout": {
+      "container": "container mx-auto px-4 md:px-8 max-w-7xl",
+      "section_spacing": "py-20 md:py-32",
+      "grid_gap": "gap-6 md:gap-8",
+      "radius": "rounded-2xl"
+    },
+    "effects": {
+      "glass": "bg-[#21242D]/80 backdrop-blur-xl border border-[#CBCCC8]/10",
+      "card_hover": "hover:bg-[#3B4961]/20 hover:border-[#3B4961] transition-all duration-300",
+      "shadow_glow": "shadow-[0_0_30px_-10px_rgba(59,73,97,0.3)]"
+    }
+  },
+  "assets": {
+    "images": {
+      "hero_robot": "https://images.unsplash.com/photo-1677442135132-141348e809d9?q=80&w=1000&auto=format&fit=crop",
+      "team_meeting": "https://images.unsplash.com/photo-1758691737182-d42aefd6dee8?q=80&w=1000&auto=format&fit=crop",
+      "tech_background": "https://images.unsplash.com/photo-1762278805303-69a5fe7b6a82?q=80&w=1000&auto=format&fit=crop",
+      "team_1": "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop",
+      "team_2": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop",
+      "team_3": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=400&auto=format&fit=crop"
+    },
+    "icons": {
+      "library": "lucide-react",
+      "whatsapp": "FaWhatsapp (from react-icons/fa)",
+      "socials": "react-icons/fa"
+    }
+  },
+  "components": {
+    "Hero": {
+      "description": "Split layout. Left: Headline 'We Build The Future' + Subtext + CTA. Right: 3D Robot Image with floating elements.",
+      "styles": "min-h-screen flex items-center relative overflow-hidden bg-[#21242D]"
+    },
+    "Services": {
+      "description": "Bento Grid layout. Cards with glass effect and subtle borders.",
+      "items": [
+        "Portfolio Websites",
+        "E-commerce",
+        "Custom Systems",
+        "AI Automation",
+        "Visual Identity",
+        "Social Media"
+      ]
+    },
+    "Values": {
+      "description": "3 Horizontal Cards with large icons and descriptions.",
+      "items": ["Innovation", "Creativity", "Client Focus"]
+    },
+    "NovaBot": {
+      "description": "Chat interface simulation or CTA to open chat. Futuristic UI.",
+      "styles": "bg-gradient-to-r from-[#21242D] to-[#3B4961]/20 rounded-3xl border border-[#CBCCC8]/10 p-8"
+    }
+  },
+  "rtl_strategy": {
+    "direction": "dynamic based on language state",
+    "font_switching": "Apply 'font-cairo' for Arabic and 'font-space' for English",
+    "layout_mirroring": "Use logical properties (ms-*, me-*, ps-*, pe-*) where possible, or conditional classes"
+  },
+  "universal_guidelines": [
+    "Use 'sonner' for toasts.",
+    "Do NOT use gradients for backgrounds, use solid #21242D with subtle noise or shapes.",
+    "Buttons must be 'pill' or 'slightly rounded' (rounded-lg).",
+    "All interactive elements must have 'data-testid'.",
+    "Use 'framer-motion' for entrance animations (fade-up).",
+    "Ensure high contrast for text #CBCCC8 on #21242D.",
+    "Never use pure black #000000."
+  ]
+}
