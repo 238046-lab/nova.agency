@@ -77,7 +77,7 @@ const NovaBotSection = () => {
             </div>
 
             <Button
-              onClick={() => window.open('https://wa.me/970599000000', '_blank')}
+              onClick={() => window.open('https://wa.me/972592128272', '_blank')}
               className="bg-[#3B4961] hover:bg-[#3B4961]/80 text-[#CBCCC8] rounded-lg px-8 py-6 text-lg hover-glow"
               data-testid="bot-cta"
             >

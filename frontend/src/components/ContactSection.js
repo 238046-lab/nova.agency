@@ -53,14 +53,14 @@ const ContactSection = () => {
     {
       icon: FaWhatsapp,
       title: t('واتساب', 'WhatsApp'),
-      value: '+970 599 000 000',
-      href: 'https://wa.me/970599000000'
+      value: '+972 592128272',
+      href: 'https://wa.me/972592128272'
     },
     {
       icon: Mail,
       title: t('البريد الإلكتروني', 'Email'),
-      value: 'somoodsalameen140@gmail.com',
-      href: 'mailto:somoodsalameen140@gmail.com'
+      value: 'novvaway@gmail.com',
+      href: 'mailto:novvaway@gmail.com'
     },
     {
       icon: MapPin,

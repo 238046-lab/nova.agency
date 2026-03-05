@@ -14,7 +14,7 @@ const Footer = () => {
   ];
 
   const socials = [
-    { icon: FaWhatsapp, href: 'https://wa.me/970599000000' },
+    { icon: FaWhatsapp, href: 'https://wa.me/972592128272' },
     { icon: FaInstagram, href: '#' },
     { icon: FaTwitter, href: '#' },
     { icon: FaLinkedin, href: '#' }

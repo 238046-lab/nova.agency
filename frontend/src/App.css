@@ -1,4 +1,12 @@
-/* Nova Agency Styles */
+/* Hide Emergent badge */
+[class*="emergent"], 
+[data-emergent],
+div[style*="Made with"],
+a[href*="emergent.sh"]:not(.App-link) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
