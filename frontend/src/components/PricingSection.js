@@ -11,7 +11,7 @@ const PricingSection = () => {
     {
       name: t('أساسي', 'Basic'),
       description: t('مثالي للمشاريع الصغيرة', 'Perfect for small projects'),
-      price: '$350',
+      price: '$150',
       period: t('يبدأ من', 'Starting'),
       features: [
         t('موقع من 5 صفحات', '5 pages website'),
@@ -24,7 +24,7 @@ const PricingSection = () => {
     {
       name: t('متقدم', 'Premium'),
       description: t('للأعمال المتوسطة والمتاجر', 'For medium businesses & stores'),
-      price: '$700',
+      price: '$350',
       period: t('يبدأ من', 'Starting'),
       features: [
         t('موقع غير محدود الصفحات', 'Unlimited pages'),
@@ -38,7 +38,7 @@ const PricingSection = () => {
     {
       name: t('احترافي', 'Extended'),
       description: t('للشركات والأنظمة المخصصة', 'For companies & custom systems'),
-      price: '$1500',
+      price: '$700',
       period: t('يبدأ من', 'Starting'),
       features: [
         t('نظام مخصص بالكامل', 'Fully custom system'),

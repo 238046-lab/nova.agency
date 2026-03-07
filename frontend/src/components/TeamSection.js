@@ -12,6 +12,18 @@ const TeamSection = () => {
       role: t('المديرة التنفيذية ومطورة البرمجيات', 'CEO & Software Developer'),
       image: 'https://customer-assets.emergentagent.com/job_nova-agency-2/artifacts/ql0l3ln5_1000311052.jpg',
       bio: t('خبيرة في تطوير البرمجيات وقيادة المشاريع التقنية', 'Expert in software development and technical project leadership')
+    },
+    {
+      name: t('أحمد الخطيب', 'Ahmad Al-Khatib'),
+      role: t('مطور واجهات أمامية', 'Frontend Developer'),
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
+      bio: t('متخصص في تصميم وتطوير واجهات المستخدم الحديثة', 'Specialist in modern UI design and development')
+    },
+    {
+      name: t('لين محمود', 'Leen Mahmoud'),
+      role: t('مصممة جرافيك', 'Graphic Designer'),
+      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face',
+      bio: t('مبدعة في تصميم الهويات البصرية والتجارب الرقمية', 'Creative in visual identity and digital experience design')
     }
   ];
 
@@ -40,7 +52,7 @@ const TeamSection = () => {
         </motion.div>
 
         {/* Team Grid */}
-        <div className="flex justify-center">
+        <div className="grid md:grid-cols-3 gap-8">
           {team.map((member, index) => (
             <motion.div
               key={index}
@@ -48,16 +60,16 @@ const TeamSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="glass-card p-8 text-center max-w-sm hover:shadow-xl transition-all duration-300 group"
+              className="glass-card p-8 text-center hover:shadow-xl transition-all duration-300 group"
               data-testid={`team-member-${index}`}
             >
               <div className="relative mb-6 inline-block">
                 <div className="absolute inset-0 bg-[#8EB1D1]/30 rounded-full blur-xl scale-90 group-hover:scale-100 transition-transform" />
-                <div className="w-40 h-40 rounded-full overflow-hidden relative z-10 border-4 border-[#8EB1D1]/30 mx-auto">
+                <div className="w-32 h-32 rounded-full overflow-hidden relative z-10 border-4 border-[#8EB1D1]/30 mx-auto">
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-full h-full object-cover object-[center_15%] scale-[1.8]"
+                    className={`w-full h-full object-cover ${index === 0 ? 'object-[center_15%] scale-[1.8]' : ''}`}
                   />
                 </div>
               </div>
