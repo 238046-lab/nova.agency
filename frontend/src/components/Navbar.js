@@ -57,7 +57,7 @@ const Navbar = () => {
             whileHover={{ scale: 1.05 }}
             data-testid="logo"
           >
-            Nova-way
+            Nova
           </motion.a>
 
           {/* Desktop Navigation */}
