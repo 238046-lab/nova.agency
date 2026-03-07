@@ -64,7 +64,7 @@ const HeroSection = () => {
             >
               {t(
                 'نحوّل أعمالك إلى تجربة رقميّة احترافية عبر تصميم وتطوير مواقع ويب حديثة للشركات والمطاعم والمتاجر.',
-                'We deliver innovative digital solutions including software development, AI automation, and digital marketing to help your business grow and stand out.'
+                'We transform your business into a professional digital experience by designing and developing modern websites for companies, restaurants, and stores.'
               )}
             </motion.p>
 
