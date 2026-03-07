@@ -8,7 +8,6 @@ import AboutSection from "./components/AboutSection";
 import ServicesSection from "./components/ServicesSection";
 import PricingSection from "./components/PricingSection";
 import NovaBotSection from "./components/NovaBotSection";
-import TeamSection from "./components/TeamSection";
 import PortfolioSection from "./components/PortfolioSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
@@ -25,7 +24,6 @@ function App() {
           <ServicesSection />
           <PricingSection />
           <NovaBotSection />
-          <TeamSection />
           <PortfolioSection />
           <ContactSection />
         </main>

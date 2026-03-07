@@ -21,7 +21,6 @@ const Navbar = () => {
     { href: '#about', label: t('من نحن', 'About') },
     { href: '#services', label: t('خدماتنا', 'Services') },
     { href: '#pricing', label: t('الأسعار', 'Pricing') },
-    { href: '#team', label: t('فريقنا', 'Team') },
     { href: '#portfolio', label: t('أعمالنا', 'Portfolio') },
     { href: '#contact', label: t('تواصل معنا', 'Contact') },
   ];
