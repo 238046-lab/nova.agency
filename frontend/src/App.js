@@ -13,12 +13,14 @@ import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
 import RamadanGreeting from "./components/RamadanGreeting";
+import RamadanDecorations from "./components/RamadanDecorations";
 
 function App() {
   return (
     <LanguageProvider>
       <div className="min-h-screen bg-white" data-testid="nova-app">
         <RamadanGreeting />
+        <RamadanDecorations />
         <Navbar />
         <main>
           <HeroSection />

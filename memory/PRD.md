@@ -1,70 +1,71 @@
-# Nova Digital Agency - PRD
+# Nova Digital Agency Website - PRD
 
 ## Original Problem Statement
-بناء موقع وكالة رقمية Nova متكامل (Frontend + Backend) مع:
-- تصميم داكن احترافي (#21242D خلفية، #CBCCC8/#A6A39D نصوص، #3B4961 عناصر تفاعلية)
-- دعم RTL للغة العربية مع خيار الإنجليزية
-- نموذج تواصل مع إرسال بريد إلكتروني وحفظ بقاعدة البيانات
+Full-stack website for a digital agency named "Nova" with a modern, professional design. Arabic-speaking user. White background with blue accents color scheme.
+
+## Core Requirements
+1. Hero Section with "ابتكار رقمي بلا حدود" title, CTAs, and 3D robot background
+2. About Nova Section
+3. Services Section with cards and starting prices
+4. Pricing Table (3 tiers)
+5. Nova Bot Section
+6. Portfolio Section
+7. Contact Form (saves to DB + email via Resend to novvaway@gmail.com)
+8. Animated Statistics Section (count-up on scroll)
+9. Responsive Design (mobile-friendly)
+10. Ramadan Theme (greeting banner + hanging decorations)
+
+## Tech Stack
+- Frontend: React, Tailwind CSS, Shadcn/UI, framer-motion, react-countup
+- Backend: FastAPI, MongoDB (motor), Pydantic
+- Integrations: Resend (email)
+- Deployment: Emergent Native (Kubernetes)
+
+## What's Been Implemented
+- Full website with all sections (Hero, About, Services, Pricing, Nova Bot, Portfolio, Contact, Footer)
+- Contact form integrated with Resend email + MongoDB
+- Animated number counters on Stats section
+- Custom favicon with Nova logo
+- Mobile menu navigation (fixed)
+- Privacy Policy & Terms links in footer (placeholder)
+- Ramadan greeting banner (top banner)
+- Ramadan decorations (hanging crescents, stars, lanterns) - COMPLETED Feb 2026
+- WhatsApp floating button
+
+## DB Schema
+- contacts: {name, email, phone, service, message, submission_date}
 
 ## Architecture
-- **Frontend**: React 19 + Tailwind CSS + Framer Motion + Shadcn/UI
-- **Backend**: FastAPI + MongoDB + Resend Email
-- **Database**: MongoDB (contacts collection)
+```
+/app/
+├── backend/
+│   ├── .env (RESEND_API_KEY, MONGO_URL, DB_NAME)
+│   ├── requirements.txt
+│   └── server.py
+└── frontend/
+    ├── .env (REACT_APP_BACKEND_URL)
+    ├── package.json
+    ├── tailwind.config.js
+    └── src/
+        ├── App.js
+        ├── index.css
+        ├── context/LanguageContext.js
+        └── components/
+            ├── Navbar.js
+            ├── HeroSection.js
+            ├── AboutSection.js
+            ├── ServicesSection.js
+            ├── PricingSection.js
+            ├── NovaBotSection.js
+            ├── PortfolioSection.js
+            ├── ContactSection.js
+            ├── Footer.js
+            ├── WhatsAppButton.js
+            ├── RamadanGreeting.js
+            ├── RamadanDecorations.js
+            └── ui/ (Shadcn components)
+```
 
-## User Personas
-1. **أصحاب الأعمال الصغيرة** - يبحثون عن حلول رقمية بأسعار معقولة
-2. **الشركات الناشئة** - تحتاج مواقع وأنظمة مخصصة
-3. **المحترفون** - يريدون مواقع بورتفوليو احترافية
-
-## Core Requirements (Static)
-- ✅ Hero Section مع صورة روبوت وCTA
-- ✅ قسم من نحن مع إحصائيات
-- ✅ القيم الجوهرية (الابتكار، الإبداع، التركيز على العميل)
-- ✅ الخدمات مع الأسعار (6 خدمات)
-- ✅ قسم Nova Bot
-- ✅ فريق العمل (صمود السلامين)
-- ✅ معرض الأعمال (3 مشاريع)
-- ✅ نموذج التواصل مع إشعار بريد إلكتروني
-- ✅ زر واتساب عائم
-- ✅ تبديل اللغة (عربي/إنجليزي)
-
-## What's Been Implemented (March 5, 2026)
-- [x] Full responsive website with all sections
-- [x] Arabic RTL support with language toggle
-- [x] Contact form with Resend email integration
-- [x] MongoDB storage for contact submissions
-- [x] WhatsApp floating button
-- [x] Smooth scroll navigation
-- [x] Animations with Framer Motion
-- [x] Dark theme with specified color palette
-
-## API Endpoints
-- GET /api/ - Health check
-- GET /api/services - List services
-- GET /api/team - Team members
-- GET /api/projects - Portfolio projects
-- POST /api/contact - Submit contact form
-- GET /api/contacts - List all contacts
-
-## Prioritized Backlog
-
-### P0 (Critical) - DONE
-- ✅ All core sections implemented
-- ✅ Contact form working
-
-### P1 (Important)
-- [ ] Admin dashboard for managing contacts
-- [ ] Real Nova Bot AI integration
-- [ ] Multi-language content management
-
-### P2 (Nice to have)
-- [ ] Blog section
-- [ ] Testimonials section
-- [ ] Live chat widget
-- [ ] SEO optimization
-
-## Next Tasks
-1. تحديث رقم الواتساب الحقيقي
-2. إضافة مشاريع حقيقية للمعرض
-3. إنشاء لوحة تحكم لإدارة الطلبات
-4. تكامل Nova Bot مع AI حقيقي
+## Backlog
+- P1: Privacy Policy & Terms pages (currently placeholder links)
+- P2: Domain linking (novaway.agency) - platform-level task
