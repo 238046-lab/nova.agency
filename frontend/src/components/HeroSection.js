@@ -98,7 +98,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, x: isRTL ? -50 : 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className={`order-1 lg:order-2 ${isRTL ? 'lg:order-1' : ''} relative`}
+            className={`order-1 lg:order-2 ${isRTL ? 'lg:order-1' : ''} relative mt-20 sm:mt-12 lg:mt-0`}
           >
             <div className="relative">
               {/* Glow effect */}
@@ -108,7 +108,7 @@ const HeroSection = () => {
               <motion.img
                 src="https://images.unsplash.com/photo-1677442135132-141348e809d9?q=80&w=1000&auto=format&fit=crop"
                 alt="AI Robot"
-                className="relative z-10 w-full max-w-lg mx-auto rounded-3xl shadow-2xl"
+                className="relative z-10 w-full max-w-[280px] sm:max-w-sm lg:max-w-lg mx-auto rounded-3xl shadow-2xl"
                 animate={{ y: [0, -15, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
                 data-testid="hero-image"
@@ -116,7 +116,7 @@ const HeroSection = () => {
 
               {/* Floating elements */}
               <motion.div
-                className="absolute top-10 -left-10 glass-card p-4 rounded-xl"
+                className="absolute top-10 -left-10 glass-card p-4 rounded-xl hidden sm:block"
                 animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               >
@@ -124,7 +124,7 @@ const HeroSection = () => {
               </motion.div>
 
               <motion.div
-                className="absolute bottom-20 -right-5 glass-card p-4 rounded-xl"
+                className="absolute bottom-20 -right-5 glass-card p-4 rounded-xl hidden sm:block"
                 animate={{ y: [0, 10, 0], rotate: [0, -5, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
               >
