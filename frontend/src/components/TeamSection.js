@@ -2,27 +2,31 @@ import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { motion } from 'framer-motion';
 import { FaWhatsapp, FaInstagram } from 'react-icons/fa';
+import { Code, Palette, Sparkles } from 'lucide-react';
 
 const TeamSection = () => {
   const { t } = useLanguage();
 
   const team = [
     {
+      name: t('أحمد الخطيب', 'Ahmad Al-Khatib'),
+      role: t('مطور واجهات أمامية', 'Frontend Developer'),
+      icon: Code,
+      color: 'from-blue-400 to-blue-600',
+      bio: t('متخصص في تصميم وتطوير واجهات المستخدم الحديثة', 'Specialist in modern UI design and development')
+    },
+    {
       name: t('صمود السلامين', 'Sumood Salameen'),
       role: t('المديرة التنفيذية ومطورة البرمجيات', 'CEO & Software Developer'),
       image: 'https://customer-assets.emergentagent.com/job_nova-agency-2/artifacts/ql0l3ln5_1000311052.jpg',
+      isMain: true,
       bio: t('خبيرة في تطوير البرمجيات وقيادة المشاريع التقنية', 'Expert in software development and technical project leadership')
-    },
-    {
-      name: t('أحمد الخطيب', 'Ahmad Al-Khatib'),
-      role: t('مطور واجهات أمامية', 'Frontend Developer'),
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
-      bio: t('متخصص في تصميم وتطوير واجهات المستخدم الحديثة', 'Specialist in modern UI design and development')
     },
     {
       name: t('لين محمود', 'Leen Mahmoud'),
       role: t('مصممة جرافيك', 'Graphic Designer'),
-      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face',
+      icon: Palette,
+      color: 'from-pink-400 to-purple-600',
       bio: t('مبدعة في تصميم الهويات البصرية والتجارب الرقمية', 'Creative in visual identity and digital experience design')
     }
   ];
@@ -52,7 +56,7 @@ const TeamSection = () => {
         </motion.div>
 
         {/* Team Grid */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-8 items-end">
           {team.map((member, index) => (
             <motion.div
               key={index}
@@ -60,21 +64,39 @@ const TeamSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="glass-card p-8 text-center hover:shadow-xl transition-all duration-300 group"
+              className={`glass-card p-8 text-center hover:shadow-xl transition-all duration-300 group ${member.isMain ? 'md:-mt-8 ring-2 ring-[#8EB1D1]/50' : ''}`}
               data-testid={`team-member-${index}`}
             >
               <div className="relative mb-6 inline-block">
-                <div className="absolute inset-0 bg-[#8EB1D1]/30 rounded-full blur-xl scale-90 group-hover:scale-100 transition-transform" />
-                <div className="w-32 h-32 rounded-full overflow-hidden relative z-10 border-4 border-[#8EB1D1]/30 mx-auto">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className={`w-full h-full object-cover ${index === 0 ? 'object-[center_15%] scale-[1.8]' : ''}`}
-                  />
-                </div>
+                <div className={`absolute inset-0 rounded-full blur-xl scale-90 group-hover:scale-100 transition-transform ${member.isMain ? 'bg-[#8EB1D1]/40' : 'bg-gradient-to-br ' + member.color + ' opacity-30'}`} />
+                
+                {member.isMain ? (
+                  // صمود - صورة حقيقية
+                  <div className="w-36 h-36 rounded-full overflow-hidden relative z-10 border-4 border-[#8EB1D1] mx-auto shadow-lg">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover object-[center_15%] scale-[1.8]"
+                    />
+                  </div>
+                ) : (
+                  // باقي الفريق - أيقونات
+                  <div className={`w-32 h-32 rounded-full relative z-10 mx-auto flex items-center justify-center bg-gradient-to-br ${member.color} shadow-lg`}>
+                    <member.icon className="w-14 h-14 text-white" />
+                  </div>
+                )}
+                
+                {member.isMain && (
+                  <div className="absolute -top-2 -right-2 z-20">
+                    <span className="bg-[#1C2B48] text-white text-xs px-2 py-1 rounded-full flex items-center gap-1">
+                      <Sparkles className="w-3 h-3" />
+                      CEO
+                    </span>
+                  </div>
+                )}
               </div>
               
-              <h3 className="text-xl font-semibold text-[#1C2B48] mb-2">
+              <h3 className={`text-xl font-semibold text-[#1C2B48] mb-2 ${member.isMain ? 'text-2xl' : ''}`}>
                 {member.name}
               </h3>
               
