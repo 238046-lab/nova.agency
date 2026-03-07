@@ -26,11 +26,18 @@ const Navbar = () => {
   ];
 
   const scrollToSection = (href) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
     setIsMobileMenuOpen(false);
+    // Small delay to allow menu to close first
+    setTimeout(() => {
+      const element = document.querySelector(href);
+      if (element) {
+        const offsetTop = element.offsetTop - 80; // Account for navbar height
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        });
+      }
+    }, 100);
   };
 
   return (
@@ -46,11 +53,15 @@ const Navbar = () => {
           {/* Logo */}
           <motion.a
             href="#"
-            className="text-2xl md:text-3xl font-bold text-[#1C2B48] tracking-tight"
+            className="flex items-center gap-2"
             whileHover={{ scale: 1.05 }}
             data-testid="logo"
           >
-            Nova
+            <img 
+              src="/logo.png" 
+              alt="Nova-way" 
+              className="h-14 md:h-16 w-auto"
+            />
           </motion.a>
 
           {/* Desktop Navigation */}
@@ -117,7 +128,7 @@ const Navbar = () => {
                 <button
                   key={link.href}
                   onClick={() => scrollToSection(link.href)}
-                  className="text-[#64748B] hover:text-[#1C2B48] transition-colors py-2 text-lg"
+                  className="text-[#64748B] hover:text-[#1C2B48] transition-colors py-2 text-lg text-right"
                   data-testid={`mobile-nav-${link.href.replace('#', '')}`}
                 >
                   {link.label}
