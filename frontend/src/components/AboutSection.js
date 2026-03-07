@@ -8,12 +8,22 @@ const AboutSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [counts, setCounts] = useState({ projects: 0, clients: 0, years: 0 });
   const sectionRef = useRef(null);
+  const animationRef = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !isVisible) {
+        if (entry.isIntersecting) {
+          // Reset counts and start animation
+          setCounts({ projects: 0, clients: 0, years: 0 });
           setIsVisible(true);
+        } else {
+          // Reset when out of view
+          setIsVisible(false);
+          setCounts({ projects: 0, clients: 0, years: 0 });
+          if (animationRef.current) {
+            clearInterval(animationRef.current);
+          }
         }
       },
       { threshold: 0.3 }
@@ -23,8 +33,13 @@ const AboutSection = () => {
       observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect();
-  }, [isVisible]);
+    return () => {
+      observer.disconnect();
+      if (animationRef.current) {
+        clearInterval(animationRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (!isVisible) return;
@@ -36,7 +51,12 @@ const AboutSection = () => {
     const targets = { projects: 50, clients: 30, years: 3 };
     let step = 0;
 
-    const timer = setInterval(() => {
+    // Clear any existing animation
+    if (animationRef.current) {
+      clearInterval(animationRef.current);
+    }
+
+    animationRef.current = setInterval(() => {
       step++;
       const progress = step / steps;
       // Easing function for smooth animation
@@ -49,12 +69,16 @@ const AboutSection = () => {
       });
 
       if (step >= steps) {
-        clearInterval(timer);
+        clearInterval(animationRef.current);
         setCounts(targets);
       }
     }, interval);
 
-    return () => clearInterval(timer);
+    return () => {
+      if (animationRef.current) {
+        clearInterval(animationRef.current);
+      }
+    };
   }, [isVisible]);
 
   return (
@@ -91,8 +115,7 @@ const AboutSection = () => {
             <div className="mt-8 flex items-center gap-8">
               <motion.div 
                 className="text-center"
-                initial={{ scale: 0.5, opacity: 0 }}
-                animate={isVisible ? { scale: 1, opacity: 1 } : {}}
+                animate={isVisible ? { scale: [0.5, 1.1, 1], opacity: [0, 1, 1] } : { scale: 0.5, opacity: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
                 <div className="text-3xl md:text-4xl font-bold text-[#8EB1D1]">
@@ -103,8 +126,7 @@ const AboutSection = () => {
               <div className="w-px h-12 bg-[#8EB1D1]/30" />
               <motion.div 
                 className="text-center"
-                initial={{ scale: 0.5, opacity: 0 }}
-                animate={isVisible ? { scale: 1, opacity: 1 } : {}}
+                animate={isVisible ? { scale: [0.5, 1.1, 1], opacity: [0, 1, 1] } : { scale: 0.5, opacity: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
                 <div className="text-3xl md:text-4xl font-bold text-[#8EB1D1]">
@@ -115,8 +137,7 @@ const AboutSection = () => {
               <div className="w-px h-12 bg-[#8EB1D1]/30" />
               <motion.div 
                 className="text-center"
-                initial={{ scale: 0.5, opacity: 0 }}
-                animate={isVisible ? { scale: 1, opacity: 1 } : {}}
+                animate={isVisible ? { scale: [0.5, 1.1, 1], opacity: [0, 1, 1] } : { scale: 0.5, opacity: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
                 <div className="text-3xl md:text-4xl font-bold text-[#8EB1D1]">
