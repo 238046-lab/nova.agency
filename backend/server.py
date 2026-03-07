@@ -1,4 +1,5 @@
-from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi import FastAPI, APIRouter, HTTPException, Request, Depends
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -9,8 +10,11 @@ from pathlib import Path
 from pydantic import BaseModel, Field, ConfigDict, EmailStr
 from typing import List, Optional
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 import resend
+import jwt
+import bcrypt
+import httpx
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -25,11 +29,19 @@ resend.api_key = os.environ.get('RESEND_API_KEY')
 SENDER_EMAIL = os.environ.get('SENDER_EMAIL', 'onboarding@resend.dev')
 RECIPIENT_EMAIL = os.environ.get('RECIPIENT_EMAIL', 'somoodsalameen140@gmail.com')
 
-# Create the main app without a prefix
-app = FastAPI()
+# JWT Config
+JWT_SECRET = os.environ.get('JWT_SECRET', 'nova-secret-key-2024-very-secure')
+JWT_ALGORITHM = "HS256"
+JWT_EXPIRATION_HOURS = 24
 
-# Create a router with the /api prefix
+# Admin credentials
+ADMIN_EMAIL = "somood@novaway.agency"
+ADMIN_PASSWORD_HASH = "$2b$12$uSrj2JvTA.tcJB1eUVA0zuvUbvXcF1a0Hc0/wCp82/w3VXrtnOg7m"
+
+# Create the main app
+app = FastAPI()
 api_router = APIRouter(prefix="/api")
+security = HTTPBearer()
 
 # Configure logging
 logging.basicConfig(
@@ -38,7 +50,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Define Models
+# ============ Models ============
+
 class StatusCheck(BaseModel):
     model_config = ConfigDict(extra="ignore")
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
@@ -66,37 +79,254 @@ class ContactResponse(BaseModel):
     created_at: str
     status: str
 
-class ServiceItem(BaseModel):
+class LoginRequest(BaseModel):
+    email: str
+    password: str
+
+class LoginResponse(BaseModel):
+    token: str
+    email: str
+
+class VisitorTrack(BaseModel):
+    referrer: Optional[str] = None
+    page: Optional[str] = "/"
+
+class VisitorResponse(BaseModel):
     id: str
-    name_ar: str
-    name_en: str
+    ip: str
+    country: Optional[str] = None
+    city: Optional[str] = None
+    device: Optional[str] = None
+    browser: Optional[str] = None
+    os: Optional[str] = None
+    referrer: Optional[str] = None
+    page: Optional[str] = None
+    visited_at: str
+
+class PortfolioCreate(BaseModel):
+    title_ar: str
+    title_en: str
     description_ar: str
     description_en: str
-    price: str
-    icon: str
-
-class TeamMember(BaseModel):
-    id: str
-    name_ar: str
-    name_en: str
-    role_ar: str
-    role_en: str
     image: str
+    category_ar: Optional[str] = None
+    category_en: Optional[str] = None
+    link: Optional[str] = None
 
-class ProjectItem(BaseModel):
+class PortfolioResponse(BaseModel):
     id: str
     title_ar: str
     title_en: str
     description_ar: str
     description_en: str
     image: str
+    category_ar: Optional[str] = None
+    category_en: Optional[str] = None
     link: Optional[str] = None
+    created_at: str
 
-# Routes
+# ============ Auth Helpers ============
+
+def create_token(email: str) -> str:
+    payload = {
+        "sub": email,
+        "exp": datetime.now(timezone.utc) + timedelta(hours=JWT_EXPIRATION_HOURS),
+        "iat": datetime.now(timezone.utc)
+    }
+    return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
+
+def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
+    try:
+        payload = jwt.decode(credentials.credentials, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+        return payload["sub"]
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="Token expired")
+    except jwt.InvalidTokenError:
+        raise HTTPException(status_code=401, detail="Invalid token")
+
+def parse_user_agent(ua: str) -> dict:
+    browser = "Unknown"
+    os_name = "Unknown"
+    device = "Desktop"
+    
+    ua_lower = ua.lower()
+    
+    if "mobile" in ua_lower or "android" in ua_lower or "iphone" in ua_lower:
+        device = "Mobile"
+    elif "tablet" in ua_lower or "ipad" in ua_lower:
+        device = "Tablet"
+    
+    if "chrome" in ua_lower and "edg" not in ua_lower:
+        browser = "Chrome"
+    elif "firefox" in ua_lower:
+        browser = "Firefox"
+    elif "safari" in ua_lower and "chrome" not in ua_lower:
+        browser = "Safari"
+    elif "edg" in ua_lower:
+        browser = "Edge"
+    elif "opera" in ua_lower or "opr" in ua_lower:
+        browser = "Opera"
+    
+    if "windows" in ua_lower:
+        os_name = "Windows"
+    elif "mac os" in ua_lower or "macintosh" in ua_lower:
+        os_name = "macOS"
+    elif "linux" in ua_lower and "android" not in ua_lower:
+        os_name = "Linux"
+    elif "android" in ua_lower:
+        os_name = "Android"
+    elif "iphone" in ua_lower or "ipad" in ua_lower:
+        os_name = "iOS"
+    
+    return {"browser": browser, "os": os_name, "device": device}
+
+# ============ Routes ============
+
 @api_router.get("/")
 async def root():
     return {"message": "Nova API is running"}
 
+# --- Auth ---
+@api_router.post("/auth/login", response_model=LoginResponse)
+async def login(request: LoginRequest):
+    if request.email != ADMIN_EMAIL:
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+    if not bcrypt.checkpw(request.password.encode(), ADMIN_PASSWORD_HASH.encode()):
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+    token = create_token(request.email)
+    return LoginResponse(token=token, email=request.email)
+
+# --- Visitor Tracking ---
+@api_router.post("/visitors/track")
+async def track_visitor(body: VisitorTrack, request: Request):
+    ip = request.headers.get("x-forwarded-for", request.headers.get("x-real-ip", request.client.host))
+    if "," in ip:
+        ip = ip.split(",")[0].strip()
+    
+    ua = request.headers.get("user-agent", "")
+    ua_info = parse_user_agent(ua)
+    
+    # Get geo info
+    country = None
+    city = None
+    try:
+        async with httpx.AsyncClient(timeout=3) as http_client:
+            geo = await http_client.get(f"http://ip-api.com/json/{ip}?fields=country,city")
+            if geo.status_code == 200:
+                data = geo.json()
+                country = data.get("country")
+                city = data.get("city")
+    except Exception:
+        pass
+    
+    visitor_doc = {
+        "id": str(uuid.uuid4()),
+        "ip": ip,
+        "country": country,
+        "city": city,
+        "device": ua_info["device"],
+        "browser": ua_info["browser"],
+        "os": ua_info["os"],
+        "referrer": body.referrer,
+        "page": body.page,
+        "visited_at": datetime.now(timezone.utc).isoformat()
+    }
+    
+    await db.visitors.insert_one(visitor_doc)
+    return {"status": "tracked"}
+
+@api_router.get("/admin/visitors", response_model=List[VisitorResponse])
+async def get_visitors(email: str = Depends(verify_token)):
+    visitors = await db.visitors.find({}, {"_id": 0}).sort("visited_at", -1).to_list(500)
+    return visitors
+
+@api_router.get("/admin/visitors/stats")
+async def get_visitor_stats(email: str = Depends(verify_token)):
+    total = await db.visitors.count_documents({})
+    today_start = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0).isoformat()
+    today = await db.visitors.count_documents({"visited_at": {"$gte": today_start}})
+    
+    # Device stats
+    pipeline = [{"$group": {"_id": "$device", "count": {"$sum": 1}}}]
+    device_stats = await db.visitors.aggregate(pipeline).to_list(10)
+    devices = {d["_id"]: d["count"] for d in device_stats if d["_id"]}
+    
+    # Country stats
+    pipeline = [{"$group": {"_id": "$country", "count": {"$sum": 1}}}, {"$sort": {"count": -1}}, {"$limit": 10}]
+    country_stats = await db.visitors.aggregate(pipeline).to_list(10)
+    countries = {c["_id"] or "Unknown": c["count"] for c in country_stats}
+    
+    return {"total": total, "today": today, "devices": devices, "countries": countries}
+
+# --- Portfolio CRUD ---
+@api_router.get("/portfolio", response_model=List[PortfolioResponse])
+async def get_portfolio():
+    projects = await db.portfolio.find({}, {"_id": 0}).sort("created_at", -1).to_list(50)
+    if not projects:
+        # Return default projects if none in DB
+        defaults = [
+            {
+                "id": "default-1",
+                "title_ar": "متجر الأناقة",
+                "title_en": "Elegance Store",
+                "description_ar": "متجر إلكتروني للأزياء والإكسسوارات",
+                "description_en": "Fashion and accessories e-commerce store",
+                "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800",
+                "category_ar": "متجر إلكتروني",
+                "category_en": "E-commerce",
+                "link": "#",
+                "created_at": datetime.now(timezone.utc).isoformat()
+            },
+            {
+                "id": "default-2",
+                "title_ar": "نظام إدارة العيادات",
+                "title_en": "Clinic Management System",
+                "description_ar": "نظام متكامل لإدارة المواعيد والمرضى",
+                "description_en": "Complete system for appointments and patients",
+                "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800",
+                "category_ar": "نظام مخصص",
+                "category_en": "Custom System",
+                "link": "#",
+                "created_at": datetime.now(timezone.utc).isoformat()
+            }
+        ]
+        return defaults
+    return projects
+
+@api_router.post("/admin/portfolio", response_model=PortfolioResponse)
+async def create_portfolio(project: PortfolioCreate, email: str = Depends(verify_token)):
+    doc = {
+        "id": str(uuid.uuid4()),
+        **project.model_dump(),
+        "created_at": datetime.now(timezone.utc).isoformat()
+    }
+    await db.portfolio.insert_one(doc)
+    return {k: v for k, v in doc.items() if k != "_id"}
+
+@api_router.put("/admin/portfolio/{project_id}", response_model=PortfolioResponse)
+async def update_portfolio(project_id: str, project: PortfolioCreate, email: str = Depends(verify_token)):
+    result = await db.portfolio.find_one({"id": project_id}, {"_id": 0})
+    if not result:
+        raise HTTPException(status_code=404, detail="Project not found")
+    update_data = project.model_dump()
+    await db.portfolio.update_one({"id": project_id}, {"$set": update_data})
+    updated = await db.portfolio.find_one({"id": project_id}, {"_id": 0})
+    return updated
+
+@api_router.delete("/admin/portfolio/{project_id}")
+async def delete_portfolio(project_id: str, email: str = Depends(verify_token)):
+    result = await db.portfolio.delete_one({"id": project_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Project not found")
+    return {"status": "deleted"}
+
+# --- Contacts (admin) ---
+@api_router.get("/admin/contacts", response_model=List[ContactResponse])
+async def get_admin_contacts(email: str = Depends(verify_token)):
+    contacts = await db.contacts.find({}, {"_id": 0}).sort("created_at", -1).to_list(500)
+    return contacts
+
+# --- Existing Routes ---
 @api_router.post("/status", response_model=StatusCheck)
 async def create_status_check(input: StatusCheckCreate):
     status_dict = input.model_dump()
@@ -115,181 +345,50 @@ async def get_status_checks():
     return status_checks
 
 @api_router.post("/contact", response_model=ContactResponse)
-async def submit_contact(request: ContactRequest):
-    """Submit contact form and send email notification"""
+async def submit_contact(request_body: ContactRequest):
     contact_id = str(uuid.uuid4())
     created_at = datetime.now(timezone.utc).isoformat()
-    
-    # Prepare document for MongoDB
     contact_doc = {
         "id": contact_id,
-        "name": request.name,
-        "email": request.email,
-        "phone": request.phone,
-        "service": request.service,
-        "message": request.message,
+        "name": request_body.name,
+        "email": request_body.email,
+        "phone": request_body.phone,
+        "service": request_body.service,
+        "message": request_body.message,
         "created_at": created_at,
         "status": "new"
     }
-    
-    # Save to MongoDB
     await db.contacts.insert_one(contact_doc)
     logger.info(f"Contact saved to database: {contact_id}")
-    
-    # Send email notification
     try:
         html_content = f"""
         <html>
         <body style="font-family: Arial, sans-serif; direction: rtl; text-align: right;">
             <h2 style="color: #3B4961;">طلب جديد من موقع Nova</h2>
             <div style="background: #f5f5f5; padding: 20px; border-radius: 10px;">
-                <p><strong>الاسم:</strong> {request.name}</p>
-                <p><strong>البريد الإلكتروني:</strong> {request.email}</p>
-                <p><strong>الهاتف:</strong> {request.phone or 'غير محدد'}</p>
-                <p><strong>الخدمة المطلوبة:</strong> {request.service or 'غير محدد'}</p>
+                <p><strong>الاسم:</strong> {request_body.name}</p>
+                <p><strong>البريد الإلكتروني:</strong> {request_body.email}</p>
+                <p><strong>الهاتف:</strong> {request_body.phone or 'غير محدد'}</p>
+                <p><strong>الخدمة المطلوبة:</strong> {request_body.service or 'غير محدد'}</p>
                 <p><strong>الرسالة:</strong></p>
-                <p style="background: white; padding: 15px; border-radius: 5px;">{request.message}</p>
+                <p style="background: white; padding: 15px; border-radius: 5px;">{request_body.message}</p>
             </div>
-            <p style="color: #666; font-size: 12px; margin-top: 20px;">
-                تم إرسال هذه الرسالة تلقائياً من موقع Nova
-            </p>
         </body>
         </html>
         """
-        
         params = {
             "from": SENDER_EMAIL,
             "to": [RECIPIENT_EMAIL],
-            "subject": f"طلب جديد من {request.name} - Nova",
+            "subject": f"طلب جديد من {request_body.name} - Nova",
             "html": html_content
         }
-        
         email_result = await asyncio.to_thread(resend.Emails.send, params)
         logger.info(f"Email sent successfully: {email_result.get('id')}")
-        
     except Exception as e:
         logger.error(f"Failed to send email: {str(e)}")
-        # Don't fail the request if email fails, contact is already saved
-    
     return ContactResponse(**{k: v for k, v in contact_doc.items() if k != '_id'})
 
-@api_router.get("/contacts", response_model=List[ContactResponse])
-async def get_contacts():
-    """Get all contact submissions"""
-    contacts = await db.contacts.find({}, {"_id": 0}).to_list(1000)
-    return contacts
-
-@api_router.get("/services", response_model=List[ServiceItem])
-async def get_services():
-    """Get all services"""
-    services = [
-        {
-            "id": "1",
-            "name_ar": "مواقع البورتفوليو",
-            "name_en": "Portfolio Websites",
-            "description_ar": "مواقع شخصية احترافية لعرض أعمالك ومهاراتك بأسلوب عصري وجذاب",
-            "description_en": "Professional personal websites to showcase your work and skills",
-            "price": "$350",
-            "icon": "Briefcase"
-        },
-        {
-            "id": "2",
-            "name_ar": "المتاجر الإلكترونية",
-            "name_en": "E-commerce Stores",
-            "description_ar": "متاجر إلكترونية متكاملة مع نظام دفع آمن وإدارة مخزون",
-            "description_en": "Complete online stores with secure payment and inventory management",
-            "price": "$400",
-            "icon": "ShoppingCart"
-        },
-        {
-            "id": "3",
-            "name_ar": "الأنظمة المخصصة",
-            "name_en": "Custom Systems",
-            "description_ar": "أنظمة برمجية مخصصة لإدارة أعمالك بكفاءة عالية",
-            "description_en": "Custom software systems to manage your business efficiently",
-            "price": "$1000",
-            "icon": "Settings"
-        },
-        {
-            "id": "4",
-            "name_ar": "أتمتة وذكاء اصطناعي",
-            "name_en": "AI & Automation",
-            "description_ar": "حلول ذكية لأتمتة العمليات وتحسين الإنتاجية",
-            "description_en": "Smart solutions to automate processes and improve productivity",
-            "price": "+$200",
-            "icon": "Bot"
-        },
-        {
-            "id": "5",
-            "name_ar": "الهوية البصرية",
-            "name_en": "Visual Identity",
-            "description_ar": "تصميم هوية بصرية كاملة تعكس قيم علامتك التجارية",
-            "description_en": "Complete visual identity design reflecting your brand values",
-            "price": "مخصص",
-            "icon": "Palette"
-        },
-        {
-            "id": "6",
-            "name_ar": "إدارة التواصل الاجتماعي",
-            "name_en": "Social Media Management",
-            "description_ar": "إدارة حساباتك على منصات التواصل الاجتماعي باحترافية",
-            "description_en": "Professional management of your social media accounts",
-            "price": "مخصص",
-            "icon": "Share2"
-        }
-    ]
-    return services
-
-@api_router.get("/team", response_model=List[TeamMember])
-async def get_team():
-    """Get team members"""
-    team = [
-        {
-            "id": "1",
-            "name_ar": "صمود السلامين",
-            "name_en": "Sumood Salameen",
-            "role_ar": "المديرة التنفيذية ومطورة البرمجيات",
-            "role_en": "CEO & Software Developer",
-            "image": "https://img.freepik.com/free-vector/hijab-woman-character_603843-1099.jpg"
-        }
-    ]
-    return team
-
-@api_router.get("/projects", response_model=List[ProjectItem])
-async def get_projects():
-    """Get portfolio projects"""
-    projects = [
-        {
-            "id": "1",
-            "title_ar": "موقع البروفيسور جرادات",
-            "title_en": "Prof. Jaradat Website",
-            "description_ar": "موقع أكاديمي شخصي مع نظام إدارة المحتوى",
-            "description_en": "Personal academic website with CMS",
-            "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800",
-            "link": "#"
-        },
-        {
-            "id": "2",
-            "title_ar": "متجر الأناقة",
-            "title_en": "Elegance Store",
-            "description_ar": "متجر إلكتروني للأزياء والإكسسوارات",
-            "description_en": "Fashion and accessories e-commerce store",
-            "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800",
-            "link": "#"
-        },
-        {
-            "id": "3",
-            "title_ar": "نظام إدارة العيادات",
-            "title_en": "Clinic Management System",
-            "description_ar": "نظام متكامل لإدارة المواعيد والمرضى",
-            "description_en": "Complete system for appointments and patients",
-            "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800",
-            "link": "#"
-        }
-    ]
-    return projects
-
-# Include the router in the main app
+# Include the router
 app.include_router(api_router)
 
 app.add_middleware(
