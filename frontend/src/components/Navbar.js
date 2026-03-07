@@ -53,15 +53,11 @@ const Navbar = () => {
           {/* Logo */}
           <motion.a
             href="#"
-            className="flex items-center gap-2"
+            className="text-2xl md:text-3xl font-bold text-[#1C2B48] tracking-tight"
             whileHover={{ scale: 1.05 }}
             data-testid="logo"
           >
-            <img 
-              src="/logo.png" 
-              alt="Nova-way" 
-              className="h-14 md:h-16 w-auto"
-            />
+            Nova-way
           </motion.a>
 
           {/* Desktop Navigation */}
