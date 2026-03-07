@@ -100,48 +100,35 @@ const HeroSection = () => {
             transition={{ duration: 0.8 }}
             className={`order-1 lg:order-2 ${isRTL ? 'lg:order-1' : ''} relative mt-20 sm:mt-12 lg:mt-0`}
           >
-            <div className="relative flex items-center justify-center">
+            <div className="relative">
               {/* Glow effect */}
               <div className="absolute inset-0 bg-[#8EB1D1]/30 rounded-full blur-3xl scale-75" />
               
-              {/* Card container with overflow visible */}
-              <div className="relative z-10 w-full max-w-[280px] sm:max-w-sm lg:max-w-lg mx-auto">
-                <div className="relative overflow-visible">
-                  {/* Background card */}
-                  <div className="w-full aspect-[5/4] rounded-3xl shadow-2xl bg-gradient-to-br from-[#c4b0d6]/40 via-[#b8a3cc]/30 to-[#a78bbe]/20 border border-white/30 backdrop-blur-md" />
-                  
-                  {/* Robot image popping out */}
-                  <motion.div
-                    className="absolute left-[10%] right-[10%] bottom-[5%]"
-                    style={{ top: '-22%' }}
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-                  >
-                    <img
-                      src="https://images.unsplash.com/photo-1677442135132-141348e809d9?q=80&w=1000&auto=format&fit=crop"
-                      alt="AI Robot"
-                      className="w-full rounded-2xl object-cover"
-                      data-testid="hero-image"
-                    />
-                  </motion.div>
-                </div>
-              </div>
+              {/* Robot image */}
+              <motion.img
+                src="https://images.unsplash.com/photo-1677442135132-141348e809d9?q=80&w=1000&auto=format&fit=crop"
+                alt="AI Robot"
+                className="relative z-10 w-full max-w-[280px] sm:max-w-sm lg:max-w-lg mx-auto rounded-3xl shadow-2xl"
+                animate={{ y: [0, -15, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+                data-testid="hero-image"
+              />
 
               {/* Floating elements */}
               <motion.div
-                className="absolute top-1/3 -left-3 lg:-left-10 glass-card p-3 lg:p-4 rounded-xl z-20"
+                className="absolute top-10 -left-10 glass-card p-4 rounded-xl"
                 animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               >
-                <Bot className="w-6 h-6 lg:w-8 lg:h-8 text-[#8EB1D1]" />
+                <Bot className="w-8 h-8 text-[#8EB1D1]" />
               </motion.div>
 
               <motion.div
-                className="absolute bottom-1/4 -right-2 lg:-right-5 glass-card p-3 lg:p-4 rounded-xl z-20"
+                className="absolute bottom-20 -right-5 glass-card p-4 rounded-xl"
                 animate={{ y: [0, 10, 0], rotate: [0, -5, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
               >
-                <Sparkles className="w-6 h-6 lg:w-8 lg:h-8 text-[#A7C7E7]" />
+                <Sparkles className="w-8 h-8 text-[#A7C7E7]" />
               </motion.div>
             </div>
           </motion.div>
