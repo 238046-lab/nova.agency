@@ -15,12 +15,12 @@ const HeroSection = () => {
   };
 
   return (
-    <section id="hero" className="min-h-screen flex items-center relative overflow-hidden bg-[#1C2B48]">
+    <section id="hero" className="min-h-screen flex items-center relative overflow-hidden bg-gradient-to-br from-white via-[#F8FAFC] to-[#E8ECEF]">
       {/* Background elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-72 h-72 bg-[#8EB1D1]/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#A7C7E7]/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#8EB1D1]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#A7C7E7]/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#8EB1D1]/10 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 md:px-8 max-w-7xl relative z-10">
@@ -38,8 +38,8 @@ const HeroSection = () => {
               transition={{ delay: 0.2 }}
               className="inline-flex items-center gap-2 bg-[#8EB1D1]/20 px-4 py-2 rounded-full mb-6"
             >
-              <Sparkles className="w-4 h-4 text-[#A7C7E7]" />
-              <span className="text-sm text-[#C4D8E5]">
+              <Sparkles className="w-4 h-4 text-[#1C2B48]" />
+              <span className="text-sm text-[#64748B]">
                 {t('وكالة رقمية متكاملة', 'Full-Service Digital Agency')}
               </span>
             </motion.div>
@@ -48,22 +48,22 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#E8ECEF] leading-tight mb-6"
+              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#1C2B48] leading-tight mb-6"
               data-testid="hero-title"
             >
-              {t('نبني ', 'We Build ')}
-              <span className="text-gradient">{t('المستقبل', 'The Future')}</span>
+              {t('ابتكار رقمي ', 'Digital innovation ')}
+              <span className="text-gradient">{t('بلا حدود', 'Without limits')}</span>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="text-base md:text-lg text-[#C4D8E5] mb-8 max-w-xl leading-relaxed"
+              className="text-base md:text-lg text-[#64748B] mb-8 max-w-xl leading-relaxed"
               data-testid="hero-description"
             >
               {t(
-                'نقدم حلولاً رقمية مبتكرة تشمل تطوير البرمجيات، أتمتة الذكاء الاصطناعي، والتسويق الرقمي لمساعدة أعمالك على النمو والتميز.',
+                'نحوّل أعمالك إلى تجربة رقميّة احترافية عبر تصميم وتطوير مواقع ويب حديثة للشركات والمطاعم والمتاجر.',
                 'We deliver innovative digital solutions including software development, AI automation, and digital marketing to help your business grow and stand out.'
               )}
             </motion.p>
@@ -76,7 +76,7 @@ const HeroSection = () => {
             >
               <Button
                 onClick={() => scrollToSection('#contact')}
-                className="bg-[#8EB1D1] hover:bg-[#A7C7E7] text-[#1C2B48] font-semibold rounded-lg px-8 py-6 text-lg hover-glow"
+                className="bg-[#1C2B48] hover:bg-[#1C2B48]/90 text-white font-semibold rounded-lg px-8 py-6 text-lg hover-glow"
                 data-testid="hero-cta-start"
               >
                 {t('ابدأ مشروعك', 'Start Your Project')}
@@ -84,7 +84,7 @@ const HeroSection = () => {
               <Button
                 onClick={() => scrollToSection('#nova-bot')}
                 variant="outline"
-                className="border-[#8EB1D1] text-[#A7C7E7] hover:bg-[#8EB1D1]/10 rounded-lg px-8 py-6 text-lg"
+                className="border-[#8EB1D1] text-[#1C2B48] hover:bg-[#8EB1D1]/10 rounded-lg px-8 py-6 text-lg"
                 data-testid="hero-cta-bot"
               >
                 <Bot className="w-5 h-5 me-2" />
@@ -147,7 +147,7 @@ const HeroSection = () => {
             className="cursor-pointer"
             onClick={() => scrollToSection('#about')}
           >
-            <ArrowDown className="w-6 h-6 text-[#C4D8E5]" />
+            <ArrowDown className="w-6 h-6 text-[#64748B]" />
           </motion.div>
         </motion.div>
       </div>

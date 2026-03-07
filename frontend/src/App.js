@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import AboutSection from "./components/AboutSection";
 import ServicesSection from "./components/ServicesSection";
+import PricingSection from "./components/PricingSection";
 import NovaBotSection from "./components/NovaBotSection";
 import TeamSection from "./components/TeamSection";
 import PortfolioSection from "./components/PortfolioSection";
@@ -16,12 +17,13 @@ import WhatsAppButton from "./components/WhatsAppButton";
 function App() {
   return (
     <LanguageProvider>
-      <div className="min-h-screen bg-[#1C2B48]" data-testid="nova-app">
+      <div className="min-h-screen bg-white" data-testid="nova-app">
         <Navbar />
         <main>
           <HeroSection />
           <AboutSection />
           <ServicesSection />
+          <PricingSection />
           <NovaBotSection />
           <TeamSection />
           <PortfolioSection />
@@ -33,9 +35,9 @@ function App() {
           position="top-center" 
           toastOptions={{
             style: {
-              background: '#21242D',
-              border: '1px solid #3B4961',
-              color: '#CBCCC8',
+              background: '#1C2B48',
+              border: '1px solid #8EB1D1',
+              color: '#E8ECEF',
             },
           }}
         />

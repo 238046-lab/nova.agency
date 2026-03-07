@@ -20,6 +20,7 @@ const Navbar = () => {
   const navLinks = [
     { href: '#about', label: t('من نحن', 'About') },
     { href: '#services', label: t('خدماتنا', 'Services') },
+    { href: '#pricing', label: t('الأسعار', 'Pricing') },
     { href: '#team', label: t('فريقنا', 'Team') },
     { href: '#portfolio', label: t('أعمالنا', 'Portfolio') },
     { href: '#contact', label: t('تواصل معنا', 'Contact') },
@@ -38,7 +39,7 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-[#1C2B48]/95 backdrop-blur-xl shadow-lg' : 'bg-transparent'
+        isScrolled ? 'bg-white/95 backdrop-blur-xl shadow-lg' : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-4 md:px-8 max-w-7xl">
@@ -46,7 +47,7 @@ const Navbar = () => {
           {/* Logo */}
           <motion.a
             href="#"
-            className="text-2xl md:text-3xl font-bold text-[#E8ECEF] tracking-tight"
+            className="text-2xl md:text-3xl font-bold text-[#1C2B48] tracking-tight"
             whileHover={{ scale: 1.05 }}
             data-testid="logo"
           >
@@ -59,7 +60,7 @@ const Navbar = () => {
               <button
                 key={link.href}
                 onClick={() => scrollToSection(link.href)}
-                className="text-[#C4D8E5] hover:text-[#E8ECEF] transition-colors duration-300 text-sm font-medium"
+                className="text-[#64748B] hover:text-[#1C2B48] transition-colors duration-300 text-sm font-medium"
                 data-testid={`nav-${link.href.replace('#', '')}`}
               >
                 {link.label}
@@ -73,7 +74,7 @@ const Navbar = () => {
               variant="ghost"
               size="icon"
               onClick={toggleLanguage}
-              className="text-[#C4D8E5] hover:text-[#E8ECEF] hover:bg-[#8EB1D1]/20"
+              className="text-[#64748B] hover:text-[#1C2B48] hover:bg-[#8EB1D1]/20"
               data-testid="language-toggle"
               aria-label="Toggle language"
             >
@@ -83,7 +84,7 @@ const Navbar = () => {
             
             <Button
               onClick={() => scrollToSection('#contact')}
-              className="hidden md:flex bg-[#8EB1D1] hover:bg-[#A7C7E7] text-[#1C2B48] font-semibold rounded-lg px-6"
+              className="hidden md:flex bg-[#1C2B48] hover:bg-[#1C2B48]/90 text-white font-semibold rounded-lg px-6"
               data-testid="nav-cta"
             >
               {t('ابدأ مشروعك', 'Start Project')}
@@ -93,7 +94,7 @@ const Navbar = () => {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden text-[#C4D8E5] hover:text-[#E8ECEF]"
+              className="md:hidden text-[#64748B] hover:text-[#1C2B48]"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               data-testid="mobile-menu-toggle"
             >
@@ -110,14 +111,14 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#1C2B48]/98 backdrop-blur-xl border-t border-[#8EB1D1]/20"
+            className="md:hidden bg-white/98 backdrop-blur-xl border-t border-[#8EB1D1]/20"
           >
             <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
               {navLinks.map((link) => (
                 <button
                   key={link.href}
                   onClick={() => scrollToSection(link.href)}
-                  className="text-[#C4D8E5] hover:text-[#E8ECEF] transition-colors py-2 text-lg"
+                  className="text-[#64748B] hover:text-[#1C2B48] transition-colors py-2 text-lg"
                   data-testid={`mobile-nav-${link.href.replace('#', '')}`}
                 >
                   {link.label}
@@ -125,7 +126,7 @@ const Navbar = () => {
               ))}
               <Button
                 onClick={() => scrollToSection('#contact')}
-                className="bg-[#8EB1D1] hover:bg-[#A7C7E7] text-[#1C2B48] font-semibold rounded-lg mt-2"
+                className="bg-[#1C2B48] hover:bg-[#1C2B48]/90 text-white font-semibold rounded-lg mt-2"
                 data-testid="mobile-nav-cta"
               >
                 {t('ابدأ مشروعك', 'Start Project')}

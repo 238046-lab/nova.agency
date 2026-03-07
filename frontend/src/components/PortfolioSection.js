@@ -7,12 +7,7 @@ const PortfolioSection = () => {
   const { t } = useLanguage();
 
   const projects = [
-    {
-      title: t('موقع البروفيسور جرادات', 'Prof. Jaradat Website'),
-      desc: t('موقع أكاديمي شخصي مع نظام إدارة المحتوى', 'Personal academic website with CMS'),
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800',
-      category: t('موقع شخصي', 'Portfolio')
-    },
+   
     {
       title: t('متجر الأناقة', 'Elegance Store'),
       desc: t('متجر إلكتروني للأزياء والإكسسوارات', 'Fashion and accessories e-commerce store'),
@@ -28,7 +23,7 @@ const PortfolioSection = () => {
   ];
 
   return (
-    <section id="portfolio" className="py-20 md:py-32 bg-[#1C2B48] relative overflow-hidden">
+    <section id="portfolio" className="py-20 md:py-32 bg-[#F8FAFC] relative overflow-hidden">
       {/* Background */}
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#A7C7E7]/10 rounded-full blur-3xl" />
       
@@ -40,10 +35,10 @@ const PortfolioSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-semibold text-[#E8ECEF] mb-4" data-testid="portfolio-title">
+          <h2 className="text-3xl md:text-5xl font-semibold text-[#1C2B48] mb-4" data-testid="portfolio-title">
             {t('أعمالنا', 'Our Work')}
           </h2>
-          <p className="text-base md:text-lg text-[#C4D8E5] max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-[#64748B] max-w-2xl mx-auto">
             {t(
               'نماذج من المشاريع التي نفتخر بإنجازها لعملائنا',
               'Samples of projects we are proud to have completed for our clients'
@@ -60,7 +55,7 @@ const PortfolioSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="glass-card overflow-hidden group cursor-pointer hover-glow"
+              className="bg-white rounded-2xl overflow-hidden shadow-lg group cursor-pointer hover:shadow-xl transition-all duration-300"
               data-testid={`portfolio-item-${index}`}
             >
               <div className="relative overflow-hidden">
@@ -71,22 +66,22 @@ const PortfolioSection = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1C2B48] to-transparent opacity-60" />
                 <div className="absolute top-4 left-4">
-                  <span className="bg-[#8EB1D1]/80 backdrop-blur-sm text-[#1C2B48] text-xs px-3 py-1 rounded-full font-medium">
+                  <span className="bg-[#1C2B48] text-white text-xs px-3 py-1 rounded-full font-medium">
                     {project.category}
                   </span>
                 </div>
                 <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="p-2 bg-[#8EB1D1]/80 backdrop-blur-sm rounded-lg">
+                  <div className="p-2 bg-white rounded-lg">
                     <ExternalLink className="w-4 h-4 text-[#1C2B48]" />
                   </div>
                 </div>
               </div>
               
               <div className="p-6">
-                <h3 className="text-lg font-semibold text-[#E8ECEF] mb-2 group-hover:text-[#A7C7E7] transition-colors">
+                <h3 className="text-lg font-semibold text-[#1C2B48] mb-2 group-hover:text-[#8EB1D1] transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-[#C4D8E5] text-sm">
+                <p className="text-[#64748B] text-sm">
                   {project.desc}
                 </p>
               </div>

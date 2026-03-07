@@ -68,7 +68,7 @@ const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 md:py-32 bg-[#1C2B48] relative overflow-hidden">
+    <section id="contact" className="py-20 md:py-32 bg-white relative overflow-hidden">
       {/* Background */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#8EB1D1]/10 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#A7C7E7]/10 rounded-full blur-3xl" />
@@ -81,10 +81,10 @@ const ContactSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-semibold text-[#E8ECEF] mb-4" data-testid="contact-title">
+          <h2 className="text-3xl md:text-5xl font-semibold text-[#1C2B48] mb-4" data-testid="contact-title">
             {t('تواصل معنا', 'Get In Touch')}
           </h2>
-          <p className="text-base md:text-lg text-[#C4D8E5] max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-[#64748B] max-w-2xl mx-auto">
             {t(
               'نحن هنا لمساعدتك. تواصل معنا لبدء مشروعك الرقمي',
               'We are here to help. Contact us to start your digital project'
@@ -103,7 +103,7 @@ const ContactSection = () => {
               <form onSubmit={handleSubmit} className="space-y-6" data-testid="contact-form">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[#E8ECEF] text-sm mb-2">
+                    <label className="block text-[#1C2B48] text-sm mb-2">
                       {t('الاسم', 'Name')} *
                     </label>
                     <Input
@@ -111,13 +111,13 @@ const ContactSection = () => {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="bg-[#1C2B48] border-[#8EB1D1]/30 text-[#E8ECEF] focus:border-[#8EB1D1] rounded-lg"
+                      className="bg-white border-[#8EB1D1]/30 text-[#1C2B48] focus:border-[#8EB1D1] rounded-lg"
                       placeholder={t('أدخل اسمك', 'Enter your name')}
                       data-testid="contact-name-input"
                     />
                   </div>
                   <div>
-                    <label className="block text-[#E8ECEF] text-sm mb-2">
+                    <label className="block text-[#1C2B48] text-sm mb-2">
                       {t('البريد الإلكتروني', 'Email')} *
                     </label>
                     <Input
@@ -125,7 +125,7 @@ const ContactSection = () => {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="bg-[#1C2B48] border-[#8EB1D1]/30 text-[#E8ECEF] focus:border-[#8EB1D1] rounded-lg"
+                      className="bg-white border-[#8EB1D1]/30 text-[#1C2B48] focus:border-[#8EB1D1] rounded-lg"
                       placeholder={t('أدخل بريدك الإلكتروني', 'Enter your email')}
                       data-testid="contact-email-input"
                     />
@@ -134,20 +134,20 @@ const ContactSection = () => {
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[#E8ECEF] text-sm mb-2">
+                    <label className="block text-[#1C2B48] text-sm mb-2">
                       {t('رقم الهاتف', 'Phone')}
                     </label>
                     <Input
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="bg-[#1C2B48] border-[#8EB1D1]/30 text-[#E8ECEF] focus:border-[#8EB1D1] rounded-lg"
+                      className="bg-white border-[#8EB1D1]/30 text-[#1C2B48] focus:border-[#8EB1D1] rounded-lg"
                       placeholder={t('أدخل رقم هاتفك', 'Enter your phone')}
                       data-testid="contact-phone-input"
                     />
                   </div>
                   <div>
-                    <label className="block text-[#E8ECEF] text-sm mb-2">
+                    <label className="block text-[#1C2B48] text-sm mb-2">
                       {t('الخدمة المطلوبة', 'Service')}
                     </label>
                     <Select
@@ -155,17 +155,17 @@ const ContactSection = () => {
                       onValueChange={(value) => setFormData({ ...formData, service: value })}
                     >
                       <SelectTrigger 
-                        className="bg-[#1C2B48] border-[#8EB1D1]/30 text-[#E8ECEF] focus:border-[#8EB1D1] rounded-lg"
+                        className="bg-white border-[#8EB1D1]/30 text-[#1C2B48] focus:border-[#8EB1D1] rounded-lg"
                         data-testid="contact-service-select"
                       >
                         <SelectValue placeholder={t('اختر الخدمة', 'Select service')} />
                       </SelectTrigger>
-                      <SelectContent className="bg-[#1C2B48] border-[#8EB1D1]/30">
+                      <SelectContent className="bg-white border-[#8EB1D1]/30">
                         {services.map((service) => (
                           <SelectItem 
                             key={service.value} 
                             value={service.value}
-                            className="text-[#E8ECEF] focus:bg-[#8EB1D1]/20"
+                            className="text-[#1C2B48] focus:bg-[#8EB1D1]/20"
                           >
                             {service.label}
                           </SelectItem>
@@ -176,14 +176,14 @@ const ContactSection = () => {
                 </div>
 
                 <div>
-                  <label className="block text-[#E8ECEF] text-sm mb-2">
+                  <label className="block text-[#1C2B48] text-sm mb-2">
                     {t('رسالتك', 'Message')} *
                   </label>
                   <Textarea
                     required
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="bg-[#1C2B48] border-[#8EB1D1]/30 text-[#E8ECEF] focus:border-[#8EB1D1] rounded-lg min-h-[150px]"
+                    className="bg-white border-[#8EB1D1]/30 text-[#1C2B48] focus:border-[#8EB1D1] rounded-lg min-h-[150px]"
                     placeholder={t('اكتب رسالتك هنا...', 'Write your message here...')}
                     data-testid="contact-message-input"
                   />
@@ -192,7 +192,7 @@ const ContactSection = () => {
                 <Button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-[#8EB1D1] hover:bg-[#A7C7E7] text-[#1C2B48] font-semibold rounded-lg py-6 text-lg hover-glow"
+                  className="w-full bg-[#1C2B48] hover:bg-[#1C2B48]/90 text-white font-semibold rounded-lg py-6 text-lg hover-glow"
                   data-testid="contact-submit-btn"
                 >
                   {isLoading ? (
@@ -219,7 +219,7 @@ const ContactSection = () => {
             className="space-y-6"
           >
             <div className="glass-card p-8 rounded-2xl mb-8">
-              <h3 className="text-xl font-semibold text-[#E8ECEF] mb-6">
+              <h3 className="text-xl font-semibold text-[#1C2B48] mb-6">
                 {t('معلومات التواصل', 'Contact Information')}
               </h3>
               <div className="space-y-6">
@@ -232,12 +232,12 @@ const ContactSection = () => {
                     className="flex items-start gap-4 group"
                     data-testid={`contact-info-${index}`}
                   >
-                    <div className="p-3 bg-[#8EB1D1]/20 rounded-xl group-hover:bg-[#8EB1D1]/30 transition-colors">
-                      <info.icon className="w-6 h-6 text-[#8EB1D1]" />
+                    <div className="p-3 bg-[#1C2B48] rounded-xl group-hover:bg-[#8EB1D1] transition-colors">
+                      <info.icon className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <p className="text-sm text-[#C4D8E5] mb-1">{info.title}</p>
-                      <p className="text-[#E8ECEF] group-hover:text-[#A7C7E7] transition-colors">{info.value}</p>
+                      <p className="text-sm text-[#64748B] mb-1">{info.title}</p>
+                      <p className="text-[#1C2B48] group-hover:text-[#8EB1D1] transition-colors">{info.value}</p>
                     </div>
                   </a>
                 ))}
@@ -245,7 +245,7 @@ const ContactSection = () => {
             </div>
 
             {/* Map placeholder */}
-            <div className="glass-card rounded-2xl overflow-hidden h-64">
+            <div className="rounded-2xl overflow-hidden h-64 shadow-lg">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d108203.83370867844!2d35.0276!3d31.5326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502e67c3d3e5f1f%3A0x2e6b0000e9b4c82f!2sHebron!5e0!3m2!1sen!2sps!4v1234567890"
                 width="100%"
@@ -255,7 +255,7 @@ const ContactSection = () => {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Nova Location"
-                className="grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
+                className="hover:opacity-90 transition-opacity"
               />
             </div>
           </motion.div>

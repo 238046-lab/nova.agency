@@ -7,7 +7,7 @@ const AboutSection = () => {
   const { t } = useLanguage();
 
   return (
-    <section id="about" className="py-20 md:py-32 bg-[#1C2B48] relative overflow-hidden">
+    <section id="about" className="py-20 md:py-32 bg-[#F8FAFC] relative overflow-hidden">
       {/* Background */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#8EB1D1]/10 rounded-full blur-3xl" />
       
@@ -20,16 +20,16 @@ const AboutSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl md:text-5xl font-semibold text-[#E8ECEF] mb-6" data-testid="about-title">
+            <h2 className="text-3xl md:text-5xl font-semibold text-[#1C2B48] mb-6" data-testid="about-title">
               {t('من نحن', 'About Nova')}
             </h2>
-            <p className="text-base md:text-lg text-[#C4D8E5] leading-relaxed mb-6">
+            <p className="text-base md:text-lg text-[#64748B] leading-relaxed mb-6">
               {t(
                 'Nova هي وكالة رقمية متكاملة متخصصة في تحويل الأفكار التجارية إلى حلول رقمية مذهلة وفعالة. نجمع بين الإبداع والتقنية لنقدم تجارب استثنائية تساعد عملاءنا على التميز في السوق الرقمي.',
                 'Nova is a full-service digital agency specializing in transforming business ideas into stunning and effective digital solutions. We combine creativity and technology to deliver exceptional experiences that help our clients stand out in the digital market.'
               )}
             </p>
-            <p className="text-base md:text-lg text-[#C4D8E5] leading-relaxed">
+            <p className="text-base md:text-lg text-[#64748B] leading-relaxed">
               {t(
                 'نستخدم أحدث التقنيات والأدوات لضمان تقديم أفضل النتائج، من تطوير المواقع والتطبيقات إلى حلول الذكاء الاصطناعي والتسويق الرقمي.',
                 'We use the latest technologies and tools to ensure the best results, from website and app development to AI solutions and digital marketing.'
@@ -39,17 +39,17 @@ const AboutSection = () => {
             <div className="mt-8 flex items-center gap-8">
               <div className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-[#8EB1D1]">50+</div>
-                <div className="text-sm text-[#C4D8E5]">{t('مشروع منجز', 'Projects')}</div>
+                <div className="text-sm text-[#64748B]">{t('مشروع منجز', 'Projects')}</div>
               </div>
               <div className="w-px h-12 bg-[#8EB1D1]/30" />
               <div className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-[#8EB1D1]">30+</div>
-                <div className="text-sm text-[#C4D8E5]">{t('عميل سعيد', 'Happy Clients')}</div>
+                <div className="text-sm text-[#64748B]">{t('عميل سعيد', 'Happy Clients')}</div>
               </div>
               <div className="w-px h-12 bg-[#8EB1D1]/30" />
               <div className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-[#8EB1D1]">3+</div>
-                <div className="text-sm text-[#C4D8E5]">{t('سنوات خبرة', 'Years')}</div>
+                <div className="text-sm text-[#64748B]">{t('سنوات خبرة', 'Years')}</div>
               </div>
             </div>
           </motion.div>
@@ -62,7 +62,7 @@ const AboutSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-6"
           >
-            <h3 className="text-2xl font-semibold text-[#E8ECEF] mb-8">
+            <h3 className="text-2xl font-semibold text-[#1C2B48] mb-8">
               {t('قيمنا الجوهرية', 'Our Core Values')}
             </h3>
             
@@ -89,16 +89,16 @@ const AboutSection = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 + index * 0.1 }}
-                className="glass-card p-6 hover:bg-[#8EB1D1]/10 hover:border-[#8EB1D1]/40 transition-all duration-300 hover-glow"
+                className="glass-card p-6 hover:shadow-xl transition-all duration-300"
                 data-testid={`value-card-${index}`}
               >
                 <div className="flex items-start gap-4">
                   <div className="p-3 bg-[#8EB1D1]/20 rounded-xl">
-                    <value.icon className="w-6 h-6 text-[#8EB1D1]" />
+                    <value.icon className="w-6 h-6 text-[#1C2B48]" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-[#E8ECEF] mb-2">{value.title}</h4>
-                    <p className="text-[#C4D8E5] text-sm">{value.desc}</p>
+                    <h4 className="text-lg font-semibold text-[#1C2B48] mb-2">{value.title}</h4>
+                    <p className="text-[#64748B] text-sm">{value.desc}</p>
                   </div>
                 </div>
               </motion.div>

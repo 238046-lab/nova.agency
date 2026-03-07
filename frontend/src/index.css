@@ -5,9 +5,10 @@
 @tailwind utilities;
 
 :root {
-  --nova-bg: #1C2B48;
-  --nova-text-warm: #C4D8E5;
-  --nova-text-silver: #E8ECEF;
+  --nova-bg: #FFFFFF;
+  --nova-bg-alt: #F8FAFC;
+  --nova-text-primary: #1C2B48;
+  --nova-text-secondary: #64748B;
   --nova-interactive: #8EB1D1;
   --nova-accent: #A7C7E7;
   --nova-primary: #8EB1D1;
@@ -95,13 +96,13 @@ body {
     @apply border-border;
   }
   body {
-    @apply bg-[#1C2B48] text-[#E8ECEF];
+    @apply bg-white text-[#1C2B48];
   }
 }
 
 @layer utilities {
   .glass-card {
-    @apply bg-[#1C2B48]/80 backdrop-blur-xl border border-[#8EB1D1]/20 rounded-2xl;
+    @apply bg-white/80 backdrop-blur-xl border border-[#8EB1D1]/20 rounded-2xl shadow-lg;
   }
   
   .nova-gradient {
@@ -109,7 +110,7 @@ body {
   }
   
   .text-gradient {
-    background: linear-gradient(135deg, #8EB1D1 0%, #A7C7E7 100%);
+    background: linear-gradient(135deg, #1C2B48 0%, #8EB1D1 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
