@@ -116,7 +116,7 @@ const HeroSection = () => {
 
               {/* Floating elements */}
               <motion.div
-                className="absolute top-10 -left-10 glass-card p-4 rounded-xl hidden sm:block"
+                className="absolute top-10 -left-10 glass-card p-4 rounded-xl"
                 animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               >
@@ -124,7 +124,7 @@ const HeroSection = () => {
               </motion.div>
 
               <motion.div
-                className="absolute bottom-20 -right-5 glass-card p-4 rounded-xl hidden sm:block"
+                className="absolute bottom-20 -right-5 glass-card p-4 rounded-xl"
                 animate={{ y: [0, 10, 0], rotate: [0, -5, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
               >
