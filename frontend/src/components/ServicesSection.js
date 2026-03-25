@@ -17,19 +17,19 @@ const ServicesSection = () => {
       icon: 'Briefcase',
       name: t('مواقع البورتفوليو', 'Portfolio Websites'),
       desc: t('مواقع شخصية احترافية لعرض أعمالك ومهاراتك بأسلوب عصري وجذاب', 'Professional personal websites to showcase your work and skills'),
-      price: '$350'
+   
     },
     {
       icon: 'ShoppingCart',
       name: t('المتاجر الإلكترونية', 'E-commerce Stores'),
       desc: t('متاجر إلكترونية متكاملة مع نظام دفع آمن وإدارة مخزون', 'Complete online stores with secure payment and inventory management'),
-      price: '$400'
+      
     },
     {
       icon: 'Settings',
       name: t('الأنظمة المخصصة', 'Custom Systems'),
       desc: t('أنظمة برمجية مخصصة لإدارة أعمالك بكفاءة عالية', 'Custom software systems to manage your business efficiently'),
-      price: '$1000'
+      
     }
   ];
 

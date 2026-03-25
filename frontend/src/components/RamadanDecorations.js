@@ -4,18 +4,7 @@ import { motion } from 'framer-motion';
 const RamadanDecorations = () => {
   // Decorations with different positions and delays
   const decorations = [
-    { type: 'crescent', x: '5%', delay: 0, size: 40, color: '#8EB1D1' },
-    { type: 'star', x: '12%', delay: 0.2, size: 20, color: '#A7C7E7' },
-    { type: 'lantern', x: '20%', delay: 0.4, size: 50, color: '#8EB1D1' },
-    { type: 'star', x: '28%', delay: 0.1, size: 16, color: '#1C2B48' },
-    { type: 'crescent', x: '35%', delay: 0.3, size: 30, color: '#A7C7E7' },
-    { type: 'star', x: '45%', delay: 0.5, size: 24, color: '#8EB1D1' },
-    { type: 'lantern', x: '55%', delay: 0.2, size: 45, color: '#A7C7E7' },
-    { type: 'star', x: '65%', delay: 0.4, size: 18, color: '#1C2B48' },
-    { type: 'crescent', x: '72%', delay: 0.1, size: 35, color: '#8EB1D1' },
-    { type: 'star', x: '80%', delay: 0.3, size: 22, color: '#A7C7E7' },
-    { type: 'lantern', x: '88%', delay: 0.5, size: 48, color: '#8EB1D1' },
-    { type: 'star', x: '95%', delay: 0.2, size: 20, color: '#1C2B48' },
+    
   ];
 
   const renderDecoration = (item, index) => {

@@ -62,7 +62,7 @@ const ContactSection = () => {
     {
       icon: MapPin,
       title: t('الموقع', 'Location'),
-      value: t('الخليل، فلسطين', 'Hebron, Palestine'),
+      value: t('    عمل عن بعد ', 'Remote Area'),
       href: '#'
     }
   ];
