@@ -1,79 +1,253 @@
+import React, { useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
+import { motion } from 'framer-motion';
+import { Mail, Phone, MapPin, Send, Loader2 } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
+import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
+import { Textarea } from '../components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
+import { toast } from 'sonner';
+import axios from 'axios';
+
+const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+
 const ContactSection = () => {
+  const { t, isRTL } = useLanguage();
+  const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    service: '',
+    message: ''
+  });
+
+  const services = [
+    { value: 'portfolio', label: t('موقع بورتفوليو', 'Portfolio Website') },
+    { value: 'ecommerce', label: t('متجر إلكتروني', 'E-commerce Store') },
+    { value: 'custom', label: t('نظام مخصص', 'Custom System') },
+    { value: 'other', label: t('أخرى', 'Other') }
+  ];
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      await axios.post(`${API}/contact`, formData);
+      toast.success(t('تم إرسال رسالتك بنجاح! سنتواصل معك قريباً', 'Message sent successfully! We will contact you soon'));
+      setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+    } catch (error) {
+      toast.error(t('حدث خطأ. يرجى المحاولة مرة أخرى', 'An error occurred. Please try again'));
+      console.error('Contact form error:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const contactInfo = [
+    {
+      icon: FaWhatsapp,
+      title: t('واتساب', 'WhatsApp'),
+      value: '+972 592128272',
+      href: 'https://wa.me/972592128272'
+    },
+    {
+      icon: Mail,
+      title: t('البريد الإلكتروني', 'Email'),
+      value: 'novvaway@gmail.com',
+      href: 'mailto:novvaway@gmail.com'
+    },
+    {
+      icon: MapPin,
+      title: t('الموقع', 'Location'),
+      value: t('    عمل عن بعد ', 'Remote Area'),
+      href: '#'
+    }
+  ];
+
   return (
-    <section className="py-20 bg-white" id="contact">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row gap-12">
-          
-          {/* 1. هذا هو جزء الفورم المعدل */}
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
+    <section id="contact" className="py-20 md:py-32 bg-white relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#8EB1D1]/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#A7C7E7]/10 rounded-full blur-3xl" />
+     
+      <div className="container mx-auto px-4 md:px-8 max-w-7xl relative z-10">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-5xl font-semibold text-[#1C2B48] mb-4" data-testid="contact-title">
+            {t('تواصل معنا', 'Get In Touch')}
+          </h2>
+          <p className="text-base md:text-lg text-[#64748B] max-w-2xl mx-auto">
+            {t(
+              'نحن هنا لمساعدتك. تواصل معنا لبدء مشروعك الرقمي',
+              'We are here to help. Contact us to start your digital project'
+            )}
+          </p>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, x: isRTL ? 30 : -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            className="flex-1"
+            viewport={{ once: true }}
           >
-            <h2 className="text-3xl font-bold mb-6 text-gray-900">تواصل معنا</h2>
-            
-            {/* التعديل هنا: إضافة action و method */}
-            <form 
-              action="https://formspree.io/f/xdapnqgo" 
-              method="POST"
-              className="space-y-4"
-            >
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">الاسم</label>
-                <input
-                  type="text"
-                  name="name" /* ضروري جداً لإرسال البيانات */
-                  required
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-purple-500 outline-none transition-all"
-                  placeholder="اسمك الكريم"
-                />
-              </div>
+            <div className="glass-card p-8 rounded-2xl">
+              <form onSubmit={handleSubmit} className="space-y-6" data-testid="contact-form">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[#1C2B48] text-sm mb-2">
+                      {t('الاسم', 'Name')} *
+                    </label>
+                    <Input
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="bg-white border-[#8EB1D1]/30 text-[#1C2B48] focus:border-[#8EB1D1] rounded-lg"
+                      placeholder={t('أدخل اسمك', 'Enter your name')}
+                      data-testid="contact-name-input"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[#1C2B48] text-sm mb-2">
+                      {t('البريد الإلكتروني', 'Email')} *
+                    </label>
+                    <Input
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="bg-white border-[#8EB1D1]/30 text-[#1C2B48] focus:border-[#8EB1D1] rounded-lg"
+                      placeholder={t('أدخل بريدك الإلكتروني', 'Enter your email')}
+                      data-testid="contact-email-input"
+                    />
+                  </div>
+                </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">البريد الإلكتروني</label>
-                <input
-                  type="email"
-                  name="email" /* ضروري جداً لإرسال البيانات */
-                  required
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-purple-500 outline-none transition-all"
-                  placeholder="email@example.com"
-                />
-              </div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[#1C2B48] text-sm mb-2">
+                      {t('رقم الهاتف', 'Phone')}
+                    </label>
+                    <Input
+                      type="tel"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="bg-white border-[#8EB1D1]/30 text-[#1C2B48] focus:border-[#8EB1D1] rounded-lg"
+                      placeholder={t('أدخل رقم هاتفك', 'Enter your phone')}
+                      data-testid="contact-phone-input"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[#1C2B48] text-sm mb-2">
+                      {t('الخدمة المطلوبة', 'Service')}
+                    </label>
+                    <Select
+                      value={formData.service}
+                      onValueChange={(value) => setFormData({ ...formData, service: value })}
+                    >
+                      <SelectTrigger
+                        className="bg-white border-[#8EB1D1]/30 text-[#1C2B48] focus:border-[#8EB1D1] rounded-lg"
+                        data-testid="contact-service-select"
+                      >
+                        <SelectValue placeholder={t('اختر الخدمة', 'Select service')} />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white border-[#8EB1D1]/30">
+                        {services.map((service) => (
+                          <SelectItem
+                            key={service.value}
+                            value={service.value}
+                            className="text-[#1C2B48] focus:bg-[#8EB1D1]/20"
+                          >
+                            {service.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">الرسالة</label>
-                <textarea
-                  name="message" /* ضروري جداً لإرسال البيانات */
-                  required
-                  rows="4"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-purple-500 outline-none transition-all"
-                  placeholder="كيف بقدر أساعدك؟"
-                ></textarea>
-              </div>
+                <div>
+                  <label className="block text-[#1C2B48] text-sm mb-2">
+                    {t('رسالتك', 'Message')} *
+                  </label>
+                  <Textarea
+                    required
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="bg-white border-[#8EB1D1]/30 text-[#1C2B48] focus:border-[#8EB1D1] rounded-lg min-h-[150px]"
+                    placeholder={t('اكتب رسالتك هنا...', 'Write your message here...')}
+                    data-testid="contact-message-input"
+                  />
+                </div>
 
-              <button
-                type="submit"
-                className="w-full bg-purple-600 text-white py-3 rounded-xl font-semibold hover:bg-purple-700 transition-colors shadow-lg shadow-purple-200"
-              >
-                إرسال الرسالة
-              </button>
-            </form>
+                <Button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full bg-[#1C2B48] hover:bg-[#1C2B48]/90 text-white font-semibold rounded-lg py-6 text-lg hover-glow"
+                  data-testid="contact-submit-btn"
+                >
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="w-5 h-5 me-2 animate-spin" />
+                      {t('جاري الإرسال...', 'Sending...')}
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5 me-2" />
+                      {t('إرسال الرسالة', 'Send Message')}
+                    </>
+                  )}
+                </Button>
+              </form>
+            </div>
           </motion.div>
 
-          {/* 2. هذا هو جزء الخريطة الذي أرسلتِه أنتِ */}
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }}
+          {/* Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, x: isRTL ? -30 : 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            className="flex-1 space-y-8"
+            viewport={{ once: true }}
+            className="space-y-6"
           >
-            <div className="space-y-4">
-              <h3 className="text-xl font-bold text-gray-900">موقعنا</h3>
-              <p className="text-gray-600">الخليل، فلسطين</p>
+            <div className="glass-card p-8 rounded-2xl mb-8">
+              <h3 className="text-xl font-semibold text-[#1C2B48] mb-6">
+                {t('معلومات التواصل', 'Contact Information')}
+              </h3>
+              <div className="space-y-6">
+                {contactInfo.map((info, index) => (
+                  <a
+                    key={index}
+                    href={info.href}
+                    target={info.href.startsWith('http') ? '_blank' : undefined}
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-4 group"
+                    data-testid={`contact-info-${index}`}
+                  >
+                    <div className="p-3 bg-[#1C2B48] rounded-xl group-hover:bg-[#8EB1D1] transition-colors">
+                      <info.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-[#64748B] mb-1">{info.title}</p>
+                      <p className="text-[#1C2B48] group-hover:text-[#8EB1D1] transition-colors">{info.value}</p>
+                    </div>
+                  </a>
+                ))}
+              </div>
             </div>
 
+            {/* Map placeholder */}
             <div className="rounded-2xl overflow-hidden h-64 shadow-lg">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3408.871274534725!2d35.0998!3d31.5297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502e6e3445885f9%3A0x6a05e55e0500!2sHebron!5e0!3m2!1sen!2sps!4v1614123456789"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d108203.83370867844!2d35.0276!3d31.5326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502e67c3d3e5f1f%3A0x2e6b0000e9b4c82f!2sHebron!5e0!3m2!1sen!2sps!4v1234567890"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -91,4 +265,5 @@ const ContactSection = () => {
   );
 };
 
+export default ContactSection;
 export default ContactSection;
