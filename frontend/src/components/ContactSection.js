@@ -10,8 +10,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { toast } from 'sonner';
 import axios from 'axios';
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
-
 const ContactSection = () => {
   const { t, isRTL } = useLanguage();
   const [isLoading, setIsLoading] = useState(false);
@@ -30,17 +28,29 @@ const ContactSection = () => {
     { value: 'other', label: t('أخرى', 'Other') }
   ];
 
+  // 🔥🔥 Formspree Integration
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      await axios.post(`${API}/contact`, formData);
-      toast.success(t('تم إرسال رسالتك بنجاح! سنتواصل معك قريباً', 'Message sent successfully! We will contact you soon'));
+      await axios.post(
+        "https://formspree.io/f/xdapnqgo",
+        formData,
+        { headers: { "Content-Type": "application/json" } }
+      );
+
+      toast.success(
+        t('تم إرسال رسالتك بنجاح! سنتواصل معك قريباً', 'Message sent successfully! We will contact you soon')
+      );
+
       setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+
     } catch (error) {
-      toast.error(t('حدث خطأ. يرجى المحاولة مرة أخرى', 'An error occurred. Please try again'));
-      console.error('Contact form error:', error);
+      toast.error(
+        t('حدث خطأ. يرجى المحاولة مرة أخرى', 'An error occurred. Please try again')
+      );
+      console.error("Formspree error:", error);
     } finally {
       setIsLoading(false);
     }
@@ -69,12 +79,11 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="py-20 md:py-32 bg-white relative overflow-hidden">
-      {/* Background */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#8EB1D1]/10 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#A7C7E7]/10 rounded-full blur-3xl" />
-     
+
       <div className="container mx-auto px-4 md:px-8 max-w-7xl relative z-10">
-        {/* Header */}
+
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -93,6 +102,7 @@ const ContactSection = () => {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12">
+
           {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: isRTL ? 30 : -30 }}
@@ -101,6 +111,7 @@ const ContactSection = () => {
           >
             <div className="glass-card p-8 rounded-2xl">
               <form onSubmit={handleSubmit} className="space-y-6" data-testid="contact-form">
+
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[#1C2B48] text-sm mb-2">
@@ -116,6 +127,7 @@ const ContactSection = () => {
                       data-testid="contact-name-input"
                     />
                   </div>
+
                   <div>
                     <label className="block text-[#1C2B48] text-sm mb-2">
                       {t('البريد الإلكتروني', 'Email')} *
@@ -146,6 +158,7 @@ const ContactSection = () => {
                       data-testid="contact-phone-input"
                     />
                   </div>
+
                   <div>
                     <label className="block text-[#1C2B48] text-sm mb-2">
                       {t('الخدمة المطلوبة', 'Service')}
@@ -160,6 +173,7 @@ const ContactSection = () => {
                       >
                         <SelectValue placeholder={t('اختر الخدمة', 'Select service')} />
                       </SelectTrigger>
+
                       <SelectContent className="bg-white border-[#8EB1D1]/30">
                         {services.map((service) => (
                           <SelectItem
@@ -207,6 +221,7 @@ const ContactSection = () => {
                     </>
                   )}
                 </Button>
+
               </form>
             </div>
           </motion.div>
@@ -222,6 +237,7 @@ const ContactSection = () => {
               <h3 className="text-xl font-semibold text-[#1C2B48] mb-6">
                 {t('معلومات التواصل', 'Contact Information')}
               </h3>
+
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
                   <a
@@ -235,16 +251,18 @@ const ContactSection = () => {
                     <div className="p-3 bg-[#1C2B48] rounded-xl group-hover:bg-[#8EB1D1] transition-colors">
                       <info.icon className="w-6 h-6 text-white" />
                     </div>
+
                     <div>
                       <p className="text-sm text-[#64748B] mb-1">{info.title}</p>
-                      <p className="text-[#1C2B48] group-hover:text-[#8EB1D1] transition-colors">{info.value}</p>
+                      <p className="text-[#1C2B48] group-hover:text-[#8EB1D1] transition-colors">
+                        {info.value}
+                      </p>
                     </div>
                   </a>
                 ))}
               </div>
             </div>
 
-            {/* Map placeholder */}
             <div className="rounded-2xl overflow-hidden h-64 shadow-lg">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d108203.83370867844!2d35.0276!3d31.5326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502e67c3d3e5f1f%3A0x2e6b0000e9b4c82f!2sHebron!5e0!3m2!1sen!2sps!4v1234567890"
@@ -258,6 +276,7 @@ const ContactSection = () => {
                 className="hover:opacity-90 transition-opacity"
               />
             </div>
+
           </motion.div>
         </div>
       </div>
