@@ -18,20 +18,20 @@ import RamadanDecorations from "./components/RamadanDecorations";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 
+
 const API = process.env.REACT_APP_BACKEND_URL;
 
 function HomePage() {
   useEffect(() => {
-    // Track visitor
-    fetch(`${API}/api/visitors/track`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        referrer: document.referrer || null,
-        page: window.location.pathname
-      })
-    }).catch(() => {});
-  }, []);
+  fetch(`${API}/api/track-visit`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      referrer: document.referrer || null,
+      page: window.location.pathname
+    })
+  }).catch(() => {});
+}, []);
 
   return (
     <div className="min-h-screen bg-white" data-testid="nova-app">
