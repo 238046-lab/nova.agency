@@ -1,7 +1,16 @@
-// Make sure to run npm install @formspree/react
-// For more help visit https://formspr.ee/react-help
-import React from 'react';
-import { useForm, ValidationError } from '@formspree/react';
+import React, { useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
+import { motion } from 'framer-motion';
+import { Mail, Phone, MapPin, Send, Loader2 } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
+import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
+import { Textarea } from '../components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
+import { toast } from 'sonner';
+import axios from 'axios';
+
+const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 function ContactForm() {
   const [state, handleSubmit] = useForm("xdapnqgo");
