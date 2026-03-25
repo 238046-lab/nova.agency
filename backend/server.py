@@ -27,6 +27,7 @@ load_dotenv(ROOT_DIR / '.env')
 mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
+visits_collection = db["visits"]
 
 # ================== Email Config ==================
 
@@ -392,8 +393,42 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 # ================== Shutdown ==================
 
+app.include_router(api_router)
+app.add_middleware(...)
+
+
+# ================== Visits API ==================
+from fastapi import Request
+from datetime import datetime
+
+@app.post("/api/track-visit")
+async def track_visit(request: Request):
+    client_host = request.client.host
+    user_agent = request.headers.get("user-agent", "")
+    referer = request.headers.get("referer", "")
+
+    visit = {
+        "ip": client_host,
+        "user_agent": user_agent,
+        "source": referer,
+        "time": datetime.utcnow()
+    }
+
+    await visits_collection.insert_one(visit)
+    return {"status": "ok"}
+
+
+@app.get("/api/visits")
+async def get_visits():
+    visits = []
+    async for v in visits_collection.find().sort("time", -1):
+        v["_id"] = str(v["_id"])
+        visits.append(v)
+    return visits
+    
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
