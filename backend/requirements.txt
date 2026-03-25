@@ -9,3 +9,4 @@ httpx
 pydantic
 resend
 python-multipart
+PyJWT
